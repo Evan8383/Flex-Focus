@@ -1,9 +1,12 @@
 const typeDefs = `
-type Test {
-  hello: String
+type UserAccount {
+  _id: ID!
+  username: String
+  email: String
 }
 type Query {
-  test: Test
+  getAllUserAccounts: [UserAccount]
+  getOneUserAccount(_id: ID!): UserAccount
 }
 `
 

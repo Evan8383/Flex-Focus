@@ -1,8 +1,13 @@
+const { UserAccount } = require('../models');
+
 const resolvers = {
   Query: {
-    test: async () => {
-      return {hello: 'Hello world!'};
+    getAllUserAccounts: async () => {
+      return await UserAccount.find({});
     },
+    getOneUserAccount: async (parent, { id }) => {
+      return await UserAccount.findOne({ id });
+    }
   }
 }
 
