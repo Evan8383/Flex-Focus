@@ -1,5 +1,5 @@
-import mongoose from 'mongoose'
-const { Schema, model } = mongoose
+const { Schema, model } = require('mongoose')
+const bcrypt = require('bcrypt');
 
 const validateEmail = (email) => {
   const emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
