@@ -23,6 +23,7 @@ if (process.argv[2] === '--clean') {
 db.once('open', async () => {
   try {
     await cleanDB('UserAccount', 'useraccounts');
+    await cleanDB('UserOptions', 'useroptions');
     await UserAccount.create(userAccountSeed);
   } catch (err) {
     console.error(err)
