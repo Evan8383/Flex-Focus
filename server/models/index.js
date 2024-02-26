@@ -1,3 +1,4 @@
 const UserAccount = require('./UserAccount');
+const UserOptions = require('./UserOptions');
 
-module.exports = { UserAccount };
+module.exports = { UserAccount, UserOptions };

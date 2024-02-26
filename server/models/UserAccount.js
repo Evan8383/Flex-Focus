@@ -11,6 +11,17 @@ const validatePassword = (password) => {
   return passwordRegex.test(password);
 }
 
+const userNotesSchema = new Schema({
+  noteTitle: {
+    type: String,
+    required: true
+  },
+  noteBody: {
+    type: String,
+    required: true
+  }
+}, { timestamps: true })
+
 const userAccountSchema = new Schema({
   username: {
     type: String,
@@ -30,7 +41,11 @@ const userAccountSchema = new Schema({
     required: true,
     minlength: 8,
     validate: [validatePassword, 'Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special character']
-
+  },
+  notes: [userNotesSchema],
+  options: {
+    type: Schema.Types.ObjectId,
+    ref: 'UserOptions'
   }
 });
 

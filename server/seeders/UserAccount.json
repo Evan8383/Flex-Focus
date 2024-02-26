@@ -2,7 +2,17 @@
   {
     "username": "john_doe",
     "email": "john.doe@example.com",
-    "password": "Password123!"
+    "password": "Password123!",
+    "notes": [
+      {
+        "noteTitle": "note 1",
+        "noteBody": "This is the body of note 1"
+      },
+      {
+        "noteTitle": "note 2",
+        "noteBody": "This is the body of note 2"
+      }
+    ]
   },
   {
     "username": "jane_smith",
