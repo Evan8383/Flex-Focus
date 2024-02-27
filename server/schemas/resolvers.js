@@ -8,6 +8,14 @@ const resolvers = {
     getOneUserAccount: async (parent, { id }) => {
       return await UserAccount.findOne({ id });
     }
+  },
+  Query: {
+    getAllExercises: async () => {
+      return await Exercise.find({})
+    },
+    getOneExercise: async (parent, { id }) => {
+      return await Exercise.findOne({ id })
+    }
   }
 }
 
