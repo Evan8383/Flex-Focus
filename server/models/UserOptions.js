@@ -1,5 +1,7 @@
 const { Schema, model } = require('mongoose')
 
+// * IF ADDING OPTIONS, ALSO UPDATE RESOLVERS.JS SETUSEROPTIONS METHOD TO HAVE THE NEW OPTION.
+
 const userOptionSchema = new Schema({
   darkMode: {
     type: Boolean,
