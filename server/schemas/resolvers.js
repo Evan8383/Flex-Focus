@@ -1,13 +1,13 @@
-const { UserAccount, UserOptions } = require('../models');
+const { UserAccount, UserOptions, Workout } = require('../models');
 
 const resolvers = {
   Query: {
     getAllUserAccounts: async () => {
-      return await UserAccount.find({}).populate('options');
+      return await UserAccount.find({}).populate('options').populate('workouts');
     },
-    getOneUserAccount: async (parent, { id }) => {
-      return await UserAccount.findOne({ id }).populate('options');
-    }
+    getOneUserAccount: async (parent, { userId }) => {
+      return await UserAccount.findOne({ _id: userId }).populate('options');
+    },
   },
   Mutation: {
     setUserOptions: async (parent, args) => {
@@ -43,6 +43,47 @@ const resolvers = {
         { $set: { options: newOptions._id } },
         { new: true }).populate('options');
     },
+    createNewWorkout: async (parent, args) => {
+      const { userId, workoutName, workoutCategory, workoutSubCategory, workoutDescription, workoutNotes } = args;
+      const newWorkout = await Workout.create(
+        {
+          workoutName: workoutName,
+          workoutCategory: workoutCategory,
+          workoutSubCategory: workoutSubCategory,
+          workoutDescription: workoutDescription,
+          workoutNotes: workoutNotes
+        }
+      );
+      await newWorkout.save();
+      await UserAccount.findOneAndUpdate(
+        { _id: userId },
+        { $push: { workouts: newWorkout._id } },
+        { new: true });
+      return newWorkout;
+    },
+    updateWorkout: async (parent, args) => {
+      const { userId, workoutId, workoutName, workoutCategory, workoutSubCategory, workoutDescription, workoutNotes } = args;
+      return await Workout.findOneAndUpdate(
+        { _id: workoutId },
+        {
+          workoutName: workoutName,
+          workoutCategory: workoutCategory,
+          workoutSubCategory: workoutSubCategory,
+          workoutDescription: workoutDescription,
+          workoutNotes: workoutNotes
+        },
+        { new: true });
+    },
+    deleteWorkout: async (parent, args) => {
+      const { userId, workoutId } = args;
+      await UserAccount.findOneAndUpdate(
+        { _id: userId },
+        { $pull: { workouts: workoutId } },
+        { new: true });
+      return await Workout.findOneAndDelete(
+        { _id: workoutId }
+      );
+    }
   }
 };
 
