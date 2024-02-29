@@ -49,7 +49,6 @@ const resolvers = {
         {
           workoutName: workoutName,
           workoutCategory: workoutCategory,
-          workoutSubCategory: workoutSubCategory,
           workoutDescription: workoutDescription,
           workoutNotes: workoutNotes
         }
@@ -68,7 +67,6 @@ const resolvers = {
         {
           workoutName: workoutName,
           workoutCategory: workoutCategory,
-          workoutSubCategory: workoutSubCategory,
           workoutDescription: workoutDescription,
           workoutNotes: workoutNotes
         },

@@ -24,11 +24,28 @@ type Workout {
   _id: ID!
   workoutName: String
   workoutCategory: String
-  workoutSubCategory: [String]
   workoutDescription: String
   workoutNotes: String
-  # libraryExercises: [Exercise]
-  # customExercises: [CustomExercise]
+  assignedExercises: [AssignedExercise]
+}
+
+type AssignedExercise {
+  _id: ID!
+  exercise: Exercise
+  goalSets: Int
+  goalReps: Int
+  goalWeight: Int
+  performance: [Performance]
+}
+
+type Performance {
+  _id: ID!
+  numberOfSet: Int
+  dropSet: Boolean
+  numberOfReps: Int
+  weight: Int
+  # * Subject to change
+  dateCompleted: String
 }
 
 type Query {
