@@ -40,9 +40,9 @@ type AssignedExercise {
 
 type Performance {
   _id: ID!
-  numberOfSet: Int
+  numberSet: Int
   dropSet: Boolean
-  numberOfReps: Int
+  numberReps: Int
   weight: Int
   # * Subject to change
   dateCompleted: String
