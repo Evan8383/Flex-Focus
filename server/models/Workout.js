@@ -7,7 +7,7 @@ const workoutSchema = new Schema({
   },
   workoutCategory: {
     type: String,
-    required: true
+    required: false
   },
   workoutSubCategory: [{
     type: String,
