@@ -30,6 +30,7 @@ db.once('open', async () => {
     await cleanDB('UserAccount', 'useraccounts');
     await cleanDB('Exercise', 'exercises');
     await cleanDB('UserExercise', 'userexercises');
+    await cleanDB('UserOptions', 'useroptions');
     await UserAccount.create(userAccountSeed);
     await Exercise.create(exerciseSeed);
     await UserExercise.create(userExerciseSeed)
