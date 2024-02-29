@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const performanceSchema = new Schema({
-  numberOfSet: {
+  numberSet: {
     type: Number,
     required: true,
   },
@@ -10,7 +10,7 @@ const performanceSchema = new Schema({
     required: false,
     default: false
   },
-  numberOfReps: {
+  numberReps: {
     type: Number,
     required: false
   },
