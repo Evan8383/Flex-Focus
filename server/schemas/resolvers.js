@@ -1,4 +1,4 @@
-const { UserAccount, UserOptions, Workout } = require('../models');
+const { UserAccount, UserOptions, Workout, Performance } = require('../models');
 
 const resolvers = {
   Query: {
