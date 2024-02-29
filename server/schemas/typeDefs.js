@@ -1,4 +1,9 @@
 const typeDefs = `#graphql
+type Auth {
+  token: ID!
+  user: UserAccount
+}
+
 type UserAccount {
   _id: ID!
   username: String
@@ -31,7 +36,7 @@ type Workout {
 
 type AssignedExercise {
   _id: ID!
-  exercise: Exercise
+  # exercise: Exercise
   goalSets: Int
   goalReps: Int
   goalWeight: Int
@@ -55,6 +60,8 @@ type Query {
 }
 
 type Mutation {
+  login(email: String!, password: String!): Auth
+  addUser(username: String!, email: String!, password: String!): Auth
   setUserOptions(userId: ID!, darkMode: Boolean, fitnessGoal: String): UserAccount
   createNewWorkout(userId: ID!, workoutName: String!, workoutCategory: String, workoutSubCategory: [String], workoutDescription: String, workoutNotes: String): Workout
   updateWorkout(workoutId: ID!, workoutName: String, workoutCategory: String, workoutSubCategory: [String], workoutDescription: String, workoutNotes: String): Workout
