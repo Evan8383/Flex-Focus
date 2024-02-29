@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const userExerciseSchema = new Schema({
-    user: {
+    userId: {
         type: Schema.Types.ObjectId,
         ref: 'UserAccount',
         required: true
