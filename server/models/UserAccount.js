@@ -46,7 +46,11 @@ const userAccountSchema = new Schema({
   options: {
     type: Schema.Types.ObjectId,
     ref: 'UserOptions'
-  }
+  },
+  workouts: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Workout'
+  }]
 });
 
 // * May need to change this to async depending on if there is speed issues.
