@@ -30,13 +30,9 @@ const resolvers = {
         ...input,
         userId: existingUser._id,
       });
-      console.log("USER EXERCISE:", userExercise)
 
-      // Save the UserExercise instance
       await userExercise.save();
-
-      // Return the created UserExercise
-      return userExercise.populate();
+      return userExercise;
     },
     editUserExercise: async (parent, { _id, userExerciseInput }) => {
       const updatedUserExercise = await UserExercise.findOneAndUpdate(
