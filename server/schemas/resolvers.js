@@ -15,7 +15,7 @@ const resolvers = {
       return await Exercise.findOne({ _id })
     },
     getUserExercises: async (parent, { userId }) => {
-      return await UserExercise.find({ userId })
+      return await UserExercise.find({ userId }).populate('userId')
     }
   },
   Mutation: {
@@ -100,16 +100,16 @@ const resolvers = {
       // Create the UserExercise instance with the correct user reference
       const userExercise = new UserExercise({
         ...input,
-        userId: existingUser._id,
+        user: existingUser,
       });
 
       await userExercise.save();
       return userExercise;
     },
-    editUserExercise: async (parent, { _id, userExerciseInput }) => {
+    editUserExercise: async (parent, { _id, input }) => {
       const updatedUserExercise = await UserExercise.findOneAndUpdate(
         { _id },
-        userExerciseInput,
+        input,
         { new: true }
       );
       return updatedUserExercise;

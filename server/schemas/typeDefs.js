@@ -19,7 +19,7 @@ type Exercise {
 
 type UserExercise {
     _id: ID!
-    userId: UserAccount!
+    user: UserAccount!
     name: String!
     category: String!
     muscleGroup: String!
@@ -28,12 +28,12 @@ type UserExercise {
   }
 
 input UserExerciseInput {
-  userId: ID
-  name: String
-  category: String
-  muscleGroup: String
+  userId: ID!
+  name: String!
+  category: String!
+  muscleGroup: String!
   subMuscleGroup: String
-  description: String
+  description: String!
 }
 
 type UserNotes {
@@ -91,7 +91,7 @@ type Mutation {
   updateWorkout(workoutId: ID!, workoutName: String, workoutCategory: String, workoutSubCategory: [String], workoutDescription: String, workoutNotes: String): Workout
   deleteWorkout(workoutId: ID!, userId: ID!): Workout
   createUserExercise(input: UserExerciseInput!): UserExercise
-  editUserExercise(_id: ID!, userExerciseInput: UserExerciseInput): UserExercise
+  editUserExercise(_id: ID!, input: UserExerciseInput): UserExercise
   deleteUserExercise(_id: ID!): Boolean
 }
 `
