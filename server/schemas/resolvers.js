@@ -1,3 +1,5 @@
+const { signToken, AuthenticationError } = require('../utils/auth');
+
 const { UserAccount, UserOptions, Workout, Performance, Exercise, UserExercise } = require('../models');
 
 const resolvers = {
@@ -19,9 +21,29 @@ const resolvers = {
     }
   },
   Mutation: {
+    login: async (parent, args) => {
+      const { email, password } = args;
+      const user = await UserAccount.findOne({ email });
+      if (!user) {
+        throw new AuthenticationError('Incorrect credentials');
+      }
+      const correctPw = await user.isValidPassword(password);
+      if (!correctPw) {
+        throw new AuthenticationError('Incorrect credentials');
+      }
+
+      const token = signToken(user);
+      return { token, user };
+    },
+    addUser: async (parent, args) => {
+      const { username, email, password } = args;
+      const user = await UserAccount.create({ username, email, password });
+      const token = signToken(user);
+      return { token, user };
+    },
     setUserOptions: async (parent, args) => {
       const { userId, darkMode, fitnessGoal } = args;
-      
+
       const userToUpdate = await UserAccount.findOne({ _id: userId })
       if (userToUpdate.options) {
         const updatedOptions = await UserOptions.findOneAndUpdate(
