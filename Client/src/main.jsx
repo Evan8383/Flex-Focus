@@ -1,8 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 
 import App from './App.jsx'
+import Index from './Index.jsx'
+
 import Home from './pages/Home.jsx'
 import About from './pages/About.jsx'
 import Contact from './pages/Contact.jsx'
@@ -17,7 +19,7 @@ import Workout from './pages/Workout.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <Index />,
     children: [
       {
         index: true,
@@ -33,34 +35,51 @@ const router = createBrowserRouter([
       },
       {
         path: '/login',
-        element: <Login />,
+        element: <Navigate to={'/app/login'}/>,
       },
       {
         path: '/signup',
-        element: <Signup />,
+        element: <Navigate to={'/app/signup'}/>,
+      }
+    ],
+  },{
+    path: '/app',
+    element: <App />,
+    children: [
+      {
+        index: true,
+        element: <Navigate to={'/app/dashboard'}/>,
       },
       {
-        path: '/app/dashoard',
         element: <Dashboard />,
+        path: '/app/dashboard'
       },
       {
-        path: '/app/exercise-list',
+        path: '/app/exercises',
         element: <ExerciseList />,
       },
       {
-        path: '/app/exercise/:id',
+        path: '/app/exercises/:id',
         element: <Exercise />,
       },
       {
-        path: '/app/my-workouts',
+        path: '/app/workouts',
         element: <MyWorkouts />,
       },
       {
-        path: '/app/workout/:id',
+        path: '/app/workouts/:id',
         element: <Workout />,
       },
+      {
+        path: '/app/login',
+        element: <Login />,
+      },
+      {
+        path: '/app/signup',
+        element: <Signup />,
+      },
     ],
-  },
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
