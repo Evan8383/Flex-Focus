@@ -79,14 +79,14 @@ const router = createBrowserRouter([
         path: '/app/workouts/:id',
         element: <Workout />,
       },
-      // {
-      //   path: '/app/login',
-      //   element: <Login />,
-      // },
-      // {
-      //   path: '/app/signup',
-      //   element: <Signup />,
-      // },
+      {
+        path: '/app/login',
+        element: <Navigate to={'/login'}/>,
+      },
+      {
+        path: '/app/signup',
+        element: <Navigate to={'/signup'}/>,
+      },
     ],
   }
 ]);

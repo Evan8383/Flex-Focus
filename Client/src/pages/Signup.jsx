@@ -6,6 +6,11 @@ import { SIGNUP_USER } from '../utils/mutations'
 
 import Auth from '../utils/auth'
 
+// Icon components
+import LockIcon from '../components/LockIcon'
+import UserIcon from '../components/UserIcon'
+import MailIcon from '../components/MailIcon'
+
 const Signup = () => {
   const [formState, setFormState] = useState({ username: '', email: '', password: '' })
   const [addUser, { error, data }] = useMutation(SIGNUP_USER)
@@ -23,27 +28,43 @@ const Signup = () => {
     }
   }
   return (
-    <div>
-      <h4>Signup</h4>
-      <form onSubmit={handleFormSubmit}>
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input type="text" name="username" id="username" onChange={handleFormChange} />
-        </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input type="email" name="email" id="email" onChange={handleFormChange} />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input type="password" name="password" id="password" onChange={handleFormChange} />
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-      <Link to="/login">Login</Link>
-    </div>
-  )
+    <>
+      <div className='bg-black w-fit m-auto p-10 h-lvh'>
 
+
+        <h4 className='text-white text-center text-2xl'>Signup</h4>
+
+
+        <form className='text-white flex flex-wrap text-center justify-center' onSubmit={handleFormSubmit}>
+          <div className=" flex flex-wrap justify-center w-full py-4">
+            <div className='flex w-full bg-gray-500 rounded'>
+              <UserIcon className='w-6 h-6 m-auto ml-1' />
+              <input className="bg-gray-500 p-1 rounded border-1 border-white placeholder:text-white w-full outline-none" placeholder='Username' type="text" name="username" id="username" onChange={handleFormChange} />
+            </div>
+          </div>
+
+          <div className=" flex flex-wrap justify-center w-full py-4">
+            <div className='flex w-full bg-gray-500 rounded'>
+              <MailIcon className='w-6 h-6 m-auto ml-1' />
+              <input className="bg-gray-500 p-1 rounded border-1 border-white placeholder:text-white w-full outline-none" placeholder='Email' type="text" name="email" id="email" onChange={handleFormChange} />
+            </div>
+          </div>
+
+          <div className=" flex flex-wrap justify-center w-full py-4">
+            <div className='flex w-full bg-gray-500 rounded'>
+              <LockIcon className='w-6 h-6 m-auto ml-1' />
+              <input className="bg-gray-500 p-1 rounded border-1 border-white placeholder:text-white w-full outline-none" placeholder='Password' type="text" name="password" id="password" onChange={handleFormChange} />
+            </div>
+          </div>
+          <button type="submit" className="w-full bg-orange-500">Submit</button>
+        </form>
+        <div className='flex gap-1 justify-center'>
+          <h5 className="w-fit">Already have an account?</h5>
+          <Link to="/login" className='w-fit text-blue-600 hover:underline'>Log in</Link>
+        </div>
+      </div>
+    </>
+  )
 }
 
 export default Signup
