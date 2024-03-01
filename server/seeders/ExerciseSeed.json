@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Bench",
+        "category": "Push",
+        "muscleGroup": "Chest",
+        "description": "Lay on bench, push bar"
+    },
+    {
+        "name": "Leg Press",
+        "category": "Legs",
+        "muscleGroup": "Legs",
+        "description": "Push with legs"
+    },
+    {
+        "name": "Crunch",
+        "category": "Abs",
+        "muscleGroup": "Abs",
+        "description": "Sit up"
+    }
+]
