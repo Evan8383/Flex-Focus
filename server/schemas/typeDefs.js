@@ -55,7 +55,10 @@ type Performance {
 
 type Query {
   getAllUserAccounts: [UserAccount]
-  getOneUserAccount(_id: ID!): UserAccount
+  getOneUserAccount(userId: ID!): UserAccount
+  getAllExercises: [Exercise]
+  getOneExercise(_id: ID!): Exercise
+  getUserExercises(userId: ID!): [UserExercise]
   getOneUserWorkouts(userId: ID!): [Workout]
 }
 
@@ -68,5 +71,23 @@ type Mutation {
   deleteWorkout(workoutId: ID!, userId: ID!): Workout
 }
 `
+//  type UserExercise {
+//   _id: ID!
+//   userId: UserAccount!
+//   name: String!
+//   category: String!
+//   muscleGroup: String!
+//   subMuscleGroup: String
+//   description: String!
+// }
+
+// input UserExerciseInput {
+//   userId: ID
+//   name: String
+//   category: String
+//   muscleGroup: String
+//   subMuscleGroup: String
+//   description: String
+// }
 
 module.exports = typeDefs;
