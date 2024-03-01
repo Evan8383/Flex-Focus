@@ -5,7 +5,7 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { Outlet } from 'react-router-dom'
+import { Outlet, Navigate } from 'react-router-dom'
 import './index.css'
 
 import Header from './components/Header';
@@ -35,11 +35,11 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 function App() {
-
+  const token = localStorage.getItem('id_token');
   return (
     <ApolloProvider client={client}>
       <main className="main">
-      <Outlet />
+        {!token ? <Navigate to={'/login'} /> : <Outlet />}
       </main>
     </ApolloProvider>
   )

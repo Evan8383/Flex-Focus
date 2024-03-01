@@ -33,14 +33,23 @@ const router = createBrowserRouter([
         path: '/contact',
         element: <Contact />,
       },
+
       {
         path: '/login',
-        element: <Navigate to={'/app/login'}/>,
+        element: <Login />,
       },
       {
         path: '/signup',
-        element: <Navigate to={'/app/signup'}/>,
+        element: <Signup />,
       }
+      // {
+      //   path: '/login',
+      //   element: <Navigate to={'/app/login'}/>,
+      // },
+      // {
+      //   path: '/signup',
+      //   element: <Navigate to={'/app/signup'}/>,
+      // }
     ],
   },{
     path: '/app',
@@ -70,14 +79,14 @@ const router = createBrowserRouter([
         path: '/app/workouts/:id',
         element: <Workout />,
       },
-      {
-        path: '/app/login',
-        element: <Login />,
-      },
-      {
-        path: '/app/signup',
-        element: <Signup />,
-      },
+      // {
+      //   path: '/app/login',
+      //   element: <Login />,
+      // },
+      // {
+      //   path: '/app/signup',
+      //   element: <Signup />,
+      // },
     ],
   }
 ]);
