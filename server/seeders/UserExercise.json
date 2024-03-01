@@ -1,0 +1,30 @@
+[
+    {
+        "userId": "65dfd029ad93eed1029b76a7",
+        "name": "flippdy flop",
+        "category": "Some category",
+        "muscleGroup": "Some group",
+        "description": "Flop around"
+    },
+    {
+        "userId": "65dfd029ad93eed1029b76a7",
+        "name": "wobble",
+        "category": "Some category",
+        "muscleGroup": "Some group",
+        "description": "wobble"
+    },
+    {
+        "userId": "65dfd029ad93eed1029b76a8",
+        "name": "flow ridda",
+        "category": "Some category",
+        "muscleGroup": "Some group",
+        "description": "Flo it up"
+    },
+    {
+        "userId": "65dfd029ad93eed1029b76a8",
+        "name": "Tripping",
+        "category": "Some category",
+        "muscleGroup": "Some group",
+        "description": "Fall to the ground"
+    }
+]

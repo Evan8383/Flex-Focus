@@ -1,4 +1,4 @@
-const { UserAccount, UserOptions, Workout, Performance } = require('../models');
+const { UserAccount, UserOptions, Workout, Performance, Exercise, UserExercise } = require('../models');
 
 const resolvers = {
   Query: {
@@ -8,6 +8,15 @@ const resolvers = {
     getOneUserAccount: async (parent, { userId }) => {
       return await UserAccount.findOne({ _id: userId }).populate('options');
     },
+    getAllExercises: async () => {
+      return await Exercise.find({})
+    },
+    getOneExercise: async (parent, { _id }) => {
+      return await Exercise.findOne({ _id })
+    },
+    getUserExercises: async (parent, { userId }) => {
+      return await UserExercise.find({ userId }).populate('userId')
+    }
   },
   Mutation: {
     setUserOptions: async (parent, args) => {
@@ -81,7 +90,34 @@ const resolvers = {
       return await Workout.findOneAndDelete(
         { _id: workoutId }
       );
-    }
+    },
+    createUserExercise: async (parent, { input }) => {
+      // Check if the userId exists and corresponds to an existing user
+      const existingUser = await UserAccount.findById(input.userId);
+      if (!existingUser) {
+        throw new Error('User not found');
+      }
+      // Create the UserExercise instance with the correct user reference
+      const userExercise = new UserExercise({
+        ...input,
+        user: existingUser,
+      });
+
+      await userExercise.save();
+      return userExercise;
+    },
+    editUserExercise: async (parent, { _id, input }) => {
+      const updatedUserExercise = await UserExercise.findOneAndUpdate(
+        { _id },
+        input,
+        { new: true }
+      );
+      return updatedUserExercise;
+    },
+    deleteUserExercise: async (parent, { _id }) => {
+      const result = await UserExercise.deleteOne({ _id });
+      return result.deletedCount === 1;
+    },
   }
 };
 
