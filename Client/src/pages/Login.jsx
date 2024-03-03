@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, Navigate } from 'react-router-dom'
 import { useMutation } from '@apollo/client'
 import { LOGIN_USER } from '../utils/mutations'
@@ -19,6 +19,8 @@ const Login = () => {
 
   const [login, { error, data }] = useMutation(LOGIN_USER)
 
+  const [formError, setFormError] = useState(false)
+
   const handleFormSubmit = async (event) => {
     event.preventDefault()
     try {
@@ -27,8 +29,13 @@ const Login = () => {
       Auth.login(data.login.token)
     } catch (e) {
       console.error(e)
+      setFormError(true)
     }
   }
+
+  useEffect(() => {
+    setFormError(false)
+  }, [formState])
 
   return (
     <>
@@ -52,6 +59,7 @@ const Login = () => {
                   <input className="bg-gray-500 p-1 rounded placeholder:text-white w-full outline-none" placeholder='Password' type="password" name="password" id="password" onChange={handleFormChange} />
                 </div>
               </div>
+            {formError? <p className='text-red-500 text-center'>Invalid email or password</p> : null}
 
               <div className=" flex flex-wrap justify-center w-full py-4">
                 <button className="w-fit py-1 px-4 rounded bg-orange-500 align-center font-bold">Login</button>
