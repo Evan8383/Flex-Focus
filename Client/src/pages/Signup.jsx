@@ -12,17 +12,10 @@ import UserIcon from '../components/UserIcon'
 import MailIcon from '../components/MailIcon'
 
 const Signup = () => {
+  Auth.loggedIn() && window.location.assign('/')
   const [formState, setFormState] = useState({ username: '', email: '', password: '' })
-  const [Cpassword, setCpassword] = useState('')
-
-  const [matchPassword, setMatchPassword] = useState(null)
 
   const [addUser, { error, data }] = useMutation(SIGNUP_USER)
-
-  const handleConfirmPassword = (event) => {
-    const { name, value } = event.target
-    setCpassword({ ...Cpassword, [name]: value })
-  }
 
   const handleFormChange = (event) => {
     const { name, value } = event.target
@@ -33,9 +26,6 @@ const Signup = () => {
     event.preventDefault()
     try {
       // * improve this
-      if (Cpassword.Cpassword !== formState.password) {
-        setMatchPassword(false)
-      }
       setMatchPassword(true)
       const { data } = await addUser({ variables: { ...formState } })
       Auth.login(data.addUser.token)
@@ -43,10 +33,6 @@ const Signup = () => {
       console.error(e)
     }
   }
-
-  useEffect(() => {
-    setMatchPassword(null)
-  }, [Cpassword, formState])
 
   return (
     <>
@@ -71,19 +57,20 @@ const Signup = () => {
             </div>
 
             <div className=" flex flex-wrap justify-center w-full py-4">
-              <div className={!matchPassword ? 'flex w-full bg-gray-500 rounded' : 'flex w-full bg-gray-500 rounded outline outline-red-700'}>
+              <div className='flex w-full bg-gray-500 rounded'>
                 <LockIcon className='w-6 h-6 m-auto ml-1' />
-                <input className="bg-gray-500 p-1 rounded placeholder:text-white w-full outline-none" placeholder='Password' type="password" name="password" id="password" onChange={handleFormChange} />
+                <input className="bg-gray-500 p-1 rounded placeholder:text-white w-full outline-none" placeholder='Password' type="text" name="password" id="password" onChange={handleFormChange} />
               </div>
             </div>
-            <div className=" flex flex-wrap justify-center w-full py-4">
-              <div className={!matchPassword ? 'flex w-full bg-gray-500 rounded' : 'flex w-full bg-gray-500 rounded outline outline-red-700'}>
-                <LockIcon className='w-6 h-6 m-auto ml-1' />
 
+            {/* <div className=" flex flex-wrap justify-center w-full py-4">
+              <div className='flex w-full bg-gray-500 rounded'>
+                <LockIcon className='w-6 h-6 m-auto ml-1' />
                 <input className="bg-gray-500 p-1 rounded placeholder:text-white w-full outline-none"
-                  placeholder='Confirm Password' type="password" name="Cpassword" id="Cpassword" onChange={handleConfirmPassword} />
+                  placeholder='Confirm Password' type="text" name="Cpassword" id="Cpassword"/>
               </div>
-            </div>
+            </div> */}
+
             <button type="submit" className="w-fit py-1 px-4 rounded bg-orange-500 align-center font-bold">Sign Up!</button>
           </form>
           <div className='flex flex-wrap gap-1 justify-center'>
