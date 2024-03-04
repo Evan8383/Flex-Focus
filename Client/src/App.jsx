@@ -10,6 +10,7 @@ import './index.css'
 
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Nav from './components/Nav';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -40,6 +41,7 @@ function App() {
     <ApolloProvider client={client}>
       <main className="main">
         {!token ? <Navigate to={'/login'} /> : <Outlet />}
+        <Nav/>
       </main>
     </ApolloProvider>
   )
