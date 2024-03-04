@@ -1,7 +1,11 @@
+import Nav from '../components/Nav'
+
 
 const Dashboard = () => {
   return (
-    <div>Dashboard</div>
+    <div className='bg-black h-lvh'>
+      <Nav />
+    </div>
   )
 }
 
