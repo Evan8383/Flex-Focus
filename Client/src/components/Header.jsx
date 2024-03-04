@@ -2,10 +2,10 @@ import React from 'react'
 
 const Header = () => {
   return (
-    <div>
-      
-    </div>
-  )
-}
+    <header >
 
-export default Header
+    </header>
+  );
+};
+
+export default Header;
