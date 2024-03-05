@@ -100,6 +100,8 @@ type Mutation {
   createUserExercise(input: UserExerciseInput!): UserExercise
   editUserExercise(_id: ID!, input: UserExerciseInput): UserExercise
   deleteUserExercise(_id: ID!): Boolean
+  addNote(userId: ID!, noteTitle: String!, noteBody: String!): UserNotes
+  deleteNote(userId: ID!, noteId: ID!): UserNotes
 }
 `
 //  type UserExercise {

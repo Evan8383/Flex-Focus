@@ -23,3 +23,18 @@ export const LOGIN_USER = gql`
   }
 }
 `
+
+export const ADD_NEW_NOTE = gql`
+mutation Mutation($userId: ID!, $noteTitle: String!, $noteBody: String!) {
+  addNote(userId: $userId, noteTitle: $noteTitle, noteBody: $noteBody) {
+    _id
+  }
+}
+`
+export const DELETE_NOTE = gql`
+  mutation Mutation($userId: ID!, $noteId: ID!) {
+  deleteNote(userId: $userId, noteId: $noteId) {
+    _id
+  }
+}
+`

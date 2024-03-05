@@ -140,6 +140,20 @@ const resolvers = {
       const result = await UserExercise.deleteOne({ _id });
       return result.deletedCount === 1;
     },
+    addNote: async (parent, args) => {
+      const { userId, noteTitle, noteBody } = args;
+      return await UserAccount.findOneAndUpdate(
+        { _id: userId },
+        { $push: { notes: { noteTitle, noteBody } } },
+        { new: true });
+    },
+    deleteNote: async (parent, args) => {
+      const { noteId, userId } = args;
+      return await UserAccount.findOneAndUpdate(
+        { _id: userId },
+        { $pull: { notes: { _id: noteId } } },
+        { new: true });
+    },
   }
 };
 
