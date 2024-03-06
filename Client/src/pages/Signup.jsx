@@ -33,7 +33,7 @@ const Signup = () => {
   return (
     <>
       {Auth.loggedIn() ? <Navigate to='/app/dashboard' /> :
-        <div className='bg-black w-full m-auto p-10 h-lvh'>
+        <div className='bg-zinc-900 w-full m-auto p-40 h-lvh'>
           <div className="max-w-fit m-auto h-full">
             <h4 className='text-white text-center text-2xl font-semibold'>Create Your Account!</h4>
             <p className='text-white text-sm text-center w-56 m-auto'>You're personal performance tracker is only a few clicks away!</p>
@@ -68,7 +68,7 @@ const Signup = () => {
               </div>
             </div> */}
 
-              <button type="submit" className="w-fit py-1 px-4 rounded bg-orange-500 align-center font-bold">Sign Up!</button>
+              <button type="submit" className="text-white p-2 pl-6 pr-6 bg-orange-500 rounded-lg outline outline-1 hover:text-gray-300">Sign Up!</button>
             </form>
             <div className='flex flex-wrap gap-1 justify-center'>
               <h5 className="w-full text-white text-center">Already have an account?</h5>

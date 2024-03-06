@@ -19,7 +19,7 @@ const Home = () => {
               alt="buff-dude"
             />
           </div>
-          <div id="about-us-content" className="flex z-50 max-md: items-center">
+          <div id="about-us-content" className="flex z-40 max-md: items-center">
             <div className="flex flex-col w-1/3 ml-auto lg:mr-48 max-md:mx-auto md:mr-12 max-md:w-full max-md:items-center">
               <h2 className="text-white text-3xl mb-4">About Us</h2>
               <p className="text-white">Welcome to FlexFocus! Meet the dynamic duo behind the scenes -
@@ -27,7 +27,7 @@ const Home = () => {
                 through fitness. With a shared commitment to health and wellness, we embarked
                 on a journey to create an app that goes beyond the ordinary, guiding you towards
                 a fitter, healthier, and more vibrant version of yourself.</p>
-              <Link to="/about" className="text-white bg-orange-500 mr-auto max-md:mr-0 mt-4 p-2 rounded-lg outline outline-1">Read More</Link>
+              <Link to="/about" className="text-white bg-orange-500 mr-auto max-md:mr-0 mt-4 p-2 rounded-lg outline outline-1 hover:text-gray-300">Read More</Link>
             </div>
           </div>
         </div>
@@ -72,7 +72,7 @@ const Home = () => {
           </div>
         </div>
         <div className="flex justify-center mt-auto pb-8">
-          <Link to="/signup" className="text-white p-2 pl-6 pr-6 bg-orange-500 rounded-lg outline outline-1">Join Now</Link>
+          <Link to="/signup" className="text-white p-2 pl-6 pr-6 bg-orange-500 rounded-lg outline outline-1 hover:text-gray-300">Join Now</Link>
         </div>
       </div>
 
