@@ -5,10 +5,10 @@ const { UserAccount, UserOptions, Workout, Performance, Exercise, UserExercise }
 const resolvers = {
   Query: {
     getAllUserAccounts: async () => {
-      return await UserAccount.find({}).populate('options').populate('workouts');
+      return await UserAccount.find({}).populate('workouts');
     },
     getOneUserAccount: async (parent, { userId }) => {
-      return await UserAccount.findOne({ _id: userId }).populate('options');
+      return await UserAccount.findOne({ _id: userId }).populate('options').populate('workouts').populate('notes');
     },
     getAllExercises: async () => {
       return await Exercise.find({})
@@ -18,7 +18,7 @@ const resolvers = {
     },
     getUserExercises: async (parent, { userId }) => {
       return await UserExercise.find({ userId }).populate('userId')
-    }
+    },
   },
   Mutation: {
     login: async (parent, args) => {
