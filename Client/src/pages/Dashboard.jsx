@@ -49,7 +49,11 @@ const Dashboard = () => {
   }
   return (
     <>
-      <div className={!showModal ? 'bg-black w-full m-auto p-10 h-screen' : 'pointer-events-none bg-black w-full m-auto p-10 h-screen'}>
+      <div className={!showModal ? 'bg-zinc-900 w-full m-auto p-10 h-screen' : 'pointer-events-none bg-zinc-900 w-full m-auto p-10 h-screen'}>
+        <div className="flex mb-4">
+          <h1 className="text-orange-500 text-7xl">FLEX</h1>
+          <h1 className="text-white text-7xl">FOCUS</h1>
+        </div>
         <h4 className='text-white text-2xl font-semibold mb-4'>Welcome {dashboardData.username}</h4>
         <h2 className='text-white text-xl font-medium mb-2'>Workouts</h2>
         {dashboardData.workouts.length ? dashboardData.workouts.map((workout) => (
@@ -61,30 +65,30 @@ const Dashboard = () => {
             </div>
           </div>
         )) : <Link to={'/app/workouts'}>
-          <div className='bg-gray-600 rounded-md mb-4 cursor-pointer flex flex-wrap items-center justify-center text-white hover:bg-gray-400 transition-colors'>
+          <div className='bg-zinc-600 rounded-md mb-4 cursor-pointer flex flex-wrap items-center justify-center text-white hover:bg-gray-400 transition-colors'>
             <p className='w-full text-center text-xl p-2' >No workouts to display</p>
             <p className="p-2 hover:underline">Click to add a workout</p>
           </div>
         </Link>}
         <div className=''>
           <h3 className='text-white text-xl font-medium mb-2'>Notes:</h3>
-          <button onClick={() => setShowModal(true)} className='text-white bg-gray-500 px-2 py-1 rounded mb-4'>Add Note</button>
+          <button onClick={() => setShowModal(true)} className='text-white bg-orange-500 px-2 py-1 rounded mb-4'>Add Note</button>
         </div>
         {dashboardData.notes.length ? dashboardData.notes.map((note) => (
-          <div className='flex justify-between bg-gray-600 mb-2 p-2 rounded' key={note._id}>
+          <div className='flex justify-between bg-zinc-600 mb-2 p-2 rounded' key={note._id}>
             <div>
               <h3 className='text-white '>{note.noteTitle}</h3>
               <p className='text-white'>{note.noteBody}</p>
             </div>
             <div className='my-auto p-1'>
-              <button onClick={handleDeleteNote} note={note._id} className='text-white bg-red-500 px-2 py-1 rounded'>Delete</button>
+              <button onClick={handleDeleteNote} note={note._id} className='text-white bg-orange-500 px-2 py-1 rounded'>Delete</button>
             </div>
           </div>
         )) : <p className='text-white text-center'>No notes to display</p>}
       </div>
 
       {showModal ? (
-        <div className='bg-black w-full h-full p-8 m-auto flex flex-wrap absolute top-0 left-0 right-0'>
+        <div className='bg-zinc-900 w-full h-full p-8 m-auto flex flex-wrap absolute top-0 left-0 right-0'>
           <div>
             <div>
               <form className='flex flex-wrap' onSubmit={handleFormSubmit}>
