@@ -59,7 +59,7 @@ const Login = () => {
                   <input className="bg-gray-500 p-1 rounded placeholder:text-white w-full outline-none" placeholder='Password' type="password" name="password" id="password" onChange={handleFormChange} />
                 </div>
               </div>
-            {formError? <p className='text-red-500 text-center'>Invalid email or password</p> : null}
+            {formError? <p className='text-red-500 text-center pb-2'>Invalid email or password</p> : null}
 
               <div className=" flex flex-wrap justify-center w-full mb-4">
                 <button className="text-white p-2 pl-6 pr-6 bg-orange-500 rounded-lg outline outline-1 hover:text-gray-300">Login</button>
