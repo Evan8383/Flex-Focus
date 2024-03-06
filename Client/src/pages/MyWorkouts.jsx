@@ -28,7 +28,7 @@ export default function MyWorkouts() {
               Add Workout
             </button>
           </div>
-        <img className='w-24 h-24 my-auto mr-4' src="../images/FlexLogo.png" alt="" />
+          <img className='w-24 h-24 my-auto mr-4' src="../images/FlexLogo.png" alt="" />
         </div>
         {loading ? <div>Loading...</div> : null}
 
@@ -45,6 +45,10 @@ export default function MyWorkouts() {
                   {workout.workoutDescription ? workout.workoutDescription : "No description available"}
                 </p>
               </div>
+            </div>
+            <div className='flex justify-around'>
+              <button className='py-2 px-5 bg-zinc-600 rounded'>Details</button>
+              <button className='py-2 px-5 bg-orange-500 rounded'>Delete</button>
             </div>
           </div>
         )) : <div className="mx-auto flex min-h-[400px] items-center justify-center p-4">No workouts to display</div>}
