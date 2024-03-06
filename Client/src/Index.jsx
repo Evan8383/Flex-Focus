@@ -11,6 +11,7 @@ import './index.css'
 
 import Header from './components/Header';
 import Footer from './components/Footer';
+import LandingNav from './components/LandingNav';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -41,6 +42,7 @@ function Index() {
   return (
     <ApolloProvider client={client}>
       <main className="main">
+        <LandingNav />
         <Outlet />
       </main>
     </ApolloProvider>

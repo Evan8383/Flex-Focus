@@ -40,7 +40,7 @@ const Login = () => {
   return (
     <>
       {Auth.loggedIn() ? <Navigate to='/app/dashboard' /> :
-        <div className='bg-black w-full m-auto p-10 h-lvh'>
+        <div className='bg-zinc-900 w-full m-auto p-40 h-lvh'>
           <div className="max-w-fit m-auto h-full">
             <h4 className='text-white text-center text-2xl font-semibold'>Welcome Back!</h4>
             <p className='text-white text-sm text-center w-56 m-auto'>You're personal performance tracker is only a few clicks away!</p>
@@ -62,7 +62,7 @@ const Login = () => {
             {formError? <p className='text-red-500 text-center'>Invalid email or password</p> : null}
 
               <div className=" flex flex-wrap justify-center w-full py-4">
-                <button className="w-fit py-1 px-4 rounded bg-orange-500 align-center font-bold">Login</button>
+                <button className="text-white p-2 pl-6 pr-6 bg-orange-500 rounded-lg outline outline-1 hover:text-gray-300">Login</button>
               </div>
             </form>
 
