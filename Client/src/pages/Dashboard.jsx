@@ -5,8 +5,7 @@ import { GET_DASHBOARD } from '../utils/queries'
 import { useState, useEffect } from 'react'
 import { useMutation } from '@apollo/client'
 import { ADD_NEW_NOTE, DELETE_NOTE } from '../utils/mutations'
-import TrashIcon from '../components/TrashIcon'
-
+import { Link } from 'react-router-dom'
 
 const Dashboard = () => {
   const [showModal, setShowModal] = useState(false);
@@ -22,8 +21,7 @@ const Dashboard = () => {
     event.preventDefault()
     try {
       const { data } = await addNewNote({ variables: { ...formState, userId: Auth.getUserAccount().data._id } })
-      console.log(data)
-      window.location.reload()
+      setShowModal(false)
     } catch (e) {
       console.error(e)
     }
@@ -31,17 +29,16 @@ const Dashboard = () => {
   const userId = Auth.getUserAccount().data._id
 
   const { loading, data, error } = useQuery(GET_DASHBOARD, {
-    variables: { userId: userId }
+    variables: { userId: userId },
+    pollInterval: 100
   })
   const dashboardData = data?.getOneUserAccount || []
-
 
   const [deleteNote, { deleteError, deleteData }] = useMutation(DELETE_NOTE)
   const handleDeleteNote = async (event, noteId) => {
     try {
       const noteId = event.target.getAttribute('note')
       const { data } = await deleteNote({ variables: { userId: userId, noteId: noteId } })
-      window.location.reload()
     } catch (e) {
       console.error(e)
     }
@@ -52,66 +49,73 @@ const Dashboard = () => {
   }
   return (
     <>
-      <div className='text-white bg-zinc-900 h-lvh'>
-        <h1 className=''>Welcome {dashboardData.username}</h1>
-        <h2>Workouts</h2>
+      <div className={!showModal ? 'bg-black w-full m-auto p-10 h-screen' : 'pointer-events-none bg-black w-full m-auto p-10 h-screen'}>
+        <h4 className='text-white text-2xl font-semibold mb-4'>Welcome {dashboardData.username}</h4>
+        <h2 className='text-white text-xl font-medium mb-2'>Workouts</h2>
         {dashboardData.workouts.length ? dashboardData.workouts.map((workout) => (
-          <div key={workout._id}>
+          <div key={workout._id} className='text-white text-xl font-medium mb-2'>
             <h3>{workout.workoutName}</h3>
-            <p>{workout.workoutDescription}</p>
-            <p>{workout.workoutNotes}</p>
+            <div className=''>
+              <p>{workout.workoutDescription}</p>
+              <p>{workout.workoutNotes}</p>
+            </div>
           </div>
-        )) : <p>No workouts to display</p>}
-        <div className='flex justify-between'>
-          <h3>Notes:</h3>
-          <button onClick={() => setShowModal(true)} > Add a New Note </button>
+        )) : <Link to={'/app/workouts'}>
+          <div className='bg-gray-600 rounded-md mb-4 cursor-pointer flex flex-wrap items-center justify-center text-white hover:bg-gray-400 transition-colors'>
+            <p className='w-full text-center text-xl p-2' >No workouts to display</p>
+            <p className="p-2 hover:underline">Click to add a workout</p>
+          </div>
+        </Link>}
+        <div className=''>
+          <h3 className='text-white text-xl font-medium mb-2'>Notes:</h3>
+          <button onClick={() => setShowModal(true)} className='text-white bg-gray-500 px-2 py-1 rounded mb-4'>Add Note</button>
         </div>
         {dashboardData.notes.length ? dashboardData.notes.map((note) => (
-          <div className='flex justify-between bg-zinc-600 mb-2' key={note._id}>
+          <div className='flex justify-between bg-gray-600 mb-2 p-2 rounded' key={note._id}>
             <div>
-              <h3>{note.noteTitle}</h3>
-              <p>{note.noteBody}</p>
+              <h3 className='text-white '>{note.noteTitle}</h3>
+              <p className='text-white'>{note.noteBody}</p>
             </div>
-            <div className='my-auto p-1 mr-3'>
-               <button onClick={handleDeleteNote} note={note._id}>X</button>
+            <div className='my-auto p-1'>
+              <button onClick={handleDeleteNote} note={note._id} className='text-white bg-red-500 px-2 py-1 rounded'>Delete</button>
             </div>
           </div>
-        )) : <p>No notes to display</p>}
-
-        {showModal ? (
-          <div className='bg-zinc-600 w-fit h-fit p-8 m-auto flex flex-wrap rounded-lg absolute top-40'>
-            <div>
-              <div>
-                <form className='flex flex-wrap' onSubmit={handleFormSubmit}>
-                  <div className='w-full'>
-                    <label htmlFor="noteTitle" className='w-full'>Note Title:</label>
-                    <input
-                      className='w-full bg-zinc-600 border-b-2 border-white text-white p-2'
-                      type="text"
-                      name="noteTitle"
-                      required
-                      onChange={handleFormChange}
-                    />
-                  </div>
-                  <div className='w-full'>
-                    <label htmlFor="noteBody">Note Body:</label>
-                    <textarea
-                      className='w-full bg-zinc-600 border-b-2 border-white text-white p-2'
-                      name="noteBody"
-                      required
-                      onChange={handleFormChange}
-                    />
-                  </div>
-                  <div className='w-full flex justify-between'>
-                    <button type='submit'> Save Changes </button>
-                    <button onClick={() => setShowModal(false)}> Close </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        ) : null}
+        )) : <p className='text-white text-center'>No notes to display</p>}
       </div>
+
+      {showModal ? (
+        <div className='bg-black w-full h-full p-8 m-auto flex flex-wrap absolute top-0 left-0 right-0'>
+          <div>
+            <div>
+              <form className='flex flex-wrap' onSubmit={handleFormSubmit}>
+                <div className='w-full mb-4'>
+                  <label htmlFor="noteTitle" className='text-white text-xl mb-4 '>Note Title:</label>
+                  <input
+                    className='w-full bg-gray-500 border-b-2 border-white text-white p-2 rounded outline-none mt-4'
+                    type="text"
+                    name="noteTitle"
+                    required
+                    onChange={handleFormChange}
+                  />
+                </div>
+                <div className='w-full mb-4'>
+                  <label htmlFor="noteBody" className='text-white text-xl'>Note Body:</label>
+                  <textarea
+                    className='w-full bg-gray-500 border-b-2 border-white text-white p-2 rounded outline-none mt-4'
+                    name="noteBody"
+                    required
+                    onChange={handleFormChange}
+                  />
+                </div>
+                <div className='w-full flex justify-between'>
+                  <button type='submit' className='text-white bg-gray-500 px-2 py-1 rounded'>Add Note</button>
+                  <button onClick={() => setShowModal(false)} className='text-white bg-gray-500 px-2 py-1 rounded'>Close</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </>
   )
 }
