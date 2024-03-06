@@ -5,7 +5,7 @@ const About = () => {
     <div className='bg-zinc-900 w-full m-auto pt-40 h-full'>
       <div className="flex flex-col items-center">
         <h1 className="text-white text-7xl text-center underline underline-offset-8 decoration-orange-500 decoration-6 ">About Us</h1>
-        <p className="text-white text-xl text-center pt-12 pb-10 w-3/4">
+        <p className="text-white text-xl text-center pt-20 pb-10 w-3/4">
           Welcome to our fitness haven! Meet the dynamic duo behind the scenes - 
           Evan and Dakota, the passionate minds driving our mission to transform 
           lives through fitness. With a shared commitment to health and wellness, 
