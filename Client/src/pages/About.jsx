@@ -30,7 +30,7 @@ const About = () => {
         <p className="text-white text-xl text-center p-4 w-3/4">
           Together, we've crafted a fitness app that is more than just sets and reps.
           It's a holistic approach to well-being, encompassing tailored workout plans,
-          nutritional insights, and a supportive community that keeps you motivated.
+          and a wide range of exercises for beginers and experts alike.
           Whether you're a seasoned fitness enthusiast or just starting your journey,
           our app is designed to meet you where you are and propel you towards success.
           Join us as we redefine fitness, one workout at a time. Evan and Dakota are

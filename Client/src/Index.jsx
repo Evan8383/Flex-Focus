@@ -44,6 +44,7 @@ function Index() {
       <main className="main">
         <LandingNav />
         <Outlet />
+        <Footer />
       </main>
     </ApolloProvider>
   )
