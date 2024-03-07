@@ -12,6 +12,8 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Nav from './components/Nav';
 
+import decode from 'jwt-decode';
+
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -37,6 +39,11 @@ const client = new ApolloClient({
 });
 function App() {
   const token = localStorage.getItem('id_token');
+  if (decode(token).exp < Date.now() / 1000) {
+    localStorage.removeItem('id_token');
+    window.location.assign('/login');
+  }
+
   return (
     <ApolloProvider client={client}>
       <main className="main">

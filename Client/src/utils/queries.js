@@ -20,3 +20,18 @@ query GetOneUserAccount($userId: ID!) {
     }
   }
 `
+
+export const GET_WORKOUTS = gql`
+query GetOneUserAccount($userId: ID!) {
+  getOneUserAccount(userId: $userId) {
+    _id
+    username
+    workouts {
+      _id
+      workoutCategory
+      workoutDescription
+      workoutName
+    }
+  }
+}
+` 

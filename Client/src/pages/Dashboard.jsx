@@ -1,4 +1,3 @@
-import Nav from '../components/Nav'
 import Auth from '../utils/auth'
 import { useQuery } from '@apollo/client'
 import { GET_DASHBOARD } from '../utils/queries'
@@ -32,6 +31,9 @@ const Dashboard = () => {
     variables: { userId: userId },
     pollInterval: 100
   })
+  if (error) {
+    window.location.assign('/login')
+  }
   const dashboardData = data?.getOneUserAccount || []
 
   const [deleteNote, { deleteError, deleteData }] = useMutation(DELETE_NOTE)
@@ -47,6 +49,7 @@ const Dashboard = () => {
   if (loading) {
     return <div>Loading...</div>
   }
+  console.log(dashboardData)
   return (
     <>
       <div className={!showModal ? 'bg-zinc-900 w-full m-auto p-10 h-screen' : 'pointer-events-none bg-zinc-900 w-full m-auto p-10 h-screen'}>
