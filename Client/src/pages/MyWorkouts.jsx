@@ -48,6 +48,9 @@ export default function MyWorkouts() {
       console.error(e)
     }
   }
+
+  const [formError, setformError] = useState('')
+
   if (loading) return <div className='bg-zinc-900 text-white'>Loading...</div>
   return (
     <>
@@ -62,7 +65,6 @@ export default function MyWorkouts() {
           <img className='w-24 h-24 my-auto mr-4' src="../images/FlexLogo.png" alt="" />
         </div>
         {loading ? <div>Loading...</div> : null}
-        {loading? <div>Loading...</div> : null}
         {workoutData.workouts.length ? workoutData.workouts.map((workout) => (
           <div key={workout._id} className="z-50 mx-auto grid max-w-2xl gap-4 px-4  min-w-full mb-4 z-10">
             <Link to={`/app/workouts/${workout._id}`}>
@@ -87,45 +89,50 @@ export default function MyWorkouts() {
       {/* Modal/form */}
       {showWorkoutModal ? (
         <div className='w-full h-screen absolute top-0 bg-zinc-900 text-white p-10'>
-          <form onSubmit={handleAddWorkout} className='bg-zinc-600 flex flex-wrap w-full p-8 rounded'>
-            <div className='mb-4'>
-              <label className="text-white">Workout Name</label>
-              <input
-                className="form-input w-full outline-none background-transparent bg-zinc-900 text-white h-10 rounded-md"
-                name="workoutName"
-                type="list"
-                options="Strength,Hypertrophy,Endurance"
-                value={formState.workoutName}
-                onChange={handleFormChange}
-              ></input>
-              <label className="text-white">Workout Category</label>
-              <select
-                className="form-input w-full outline-none background-transparent bg-zinc-900 text-white h-10 rounded-md"
-                name="workoutCategory"
-                value={formState.workoutCategory}
-                onChange={handleFormChange}
-              >
-                <option></option>
-                <option value="Strength">Strength</option>
-                <option value="Hypertrophy">Hypertrophy</option>
-                <option value="Endurance">Endurance</option>
-              </select>
-              <label className="text-white">Workout Description</label>
-              <textarea
-                className="form-input w-full outline-none background-transparent h-24 bg-zinc-900 text-whitea rounded-md resize-y"
-                name="workoutDescription"
-                type="text"
-                value={formState.workoutDescription}
-                onChange={handleFormChange}
-              ></textarea>
-            </div>
-            <div className='flex justify-between'>
-              <div className='flex justify-end'>
-                <button type="submit">Submit</button>
-                <button onClick={() => setShowWorkoutModal(false)}>Close</button>
+          <div>
+            <div className='bg-orange-500 bg-zinc-500 p-2 rounded'>
+              <h2 className='text-2xl font-bold mb-2'>New Workout:</h2>
+              <form onSubmit={handleAddWorkout} className='bg-zinc-600 flex flex-wrap w-full p-3 rounded mb-4'>
+                <label className="text-white text-lg">Workout Name</label>
+                <input
+                  className="form-input w-full outline-none background-transparent bg-zinc-900 text-white h-10 rounded-md mb-4 p-2"
+                  name="workoutName"
+                  type="list"
+                  options="Strength,Hypertrophy,Endurance"
+                  value={formState.workoutName}
+                  onChange={handleFormChange}
+                ></input>
+                <label className="text-white text-lg">Workout Category</label>
+                <select
+                  className="form-input w-full outline-none background-transparent bg-zinc-900 text-white h-10 rounded-md mb-4 p-2"
+                  name="workoutCategory"
+                  value={formState.workoutCategory}
+                  onChange={handleFormChange}
+                >
+                  <option></option>
+                  <option value="Strength">Strength</option>
+                  <option value="Hypertrophy">Hypertrophy</option>
+                  <option value="Endurance">Endurance</option>
+                </select>
+                <label className="text-white text-lg">Workout Description</label>
+                <textarea
+                  className="form-input w-full outline-none background-transparent h-24 bg-zinc-900 text-whitea rounded-md resize-y p-2"
+                  name="workoutDescription"
+                  type="text"
+                  value={formState.workoutDescription}
+                  onChange={handleFormChange}
+                ></textarea>
+              </form>
+              <div className='flex justify-between'>
+                <div >
+                  <button className='bg-blue-500 mr-auto px-4 py-1 rounded' type="submit">Submit</button>
+                </div>
+                <div >
+                  <button className='bg-orange-500 px-4 py-1 rounded' type='button' onClick={() => setShowWorkoutModal(false)}>Close</button>
+                </div>
               </div>
             </div>
-          </form>
+          </div>
         </div>
       ) : null}
     </>
