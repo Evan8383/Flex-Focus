@@ -13,6 +13,7 @@ export default function MyWorkouts() {
     setFormState({ workoutName: '', workoutCategory: '', workoutDescription: '' })
   }, [showWorkoutModal])
 
+
   const [formState, setFormState] = useState({ workoutName: '', workoutCategory: '', workoutDescription: '' })
   const handleFormChange = (event) => {
     const { name, value } = event.target
@@ -37,6 +38,12 @@ export default function MyWorkouts() {
     }
   }
 
+  const [formError, setFormError] = useState()
+
+  useEffect(() => {
+    setFormError(false)
+  }, [formState])
+
   const [addWorkout, { addError, addData }] = useMutation(ADD_WORKOUT)
   const handleAddWorkout = async (event) => {
     event.preventDefault()
@@ -45,11 +52,11 @@ export default function MyWorkouts() {
       setShowWorkoutModal(false)
       setFormState({ workoutName: '', workoutCategory: '', workoutDescription: '' })
     } catch (e) {
-      console.error(e)
+      setFormError(true)
+      console.error('Form error')
     }
   }
 
-  const [formError, setformError] = useState('')
 
   if (loading) return <div className='bg-zinc-900 text-white'>Loading...</div>
   return (
@@ -95,10 +102,12 @@ export default function MyWorkouts() {
               <form onSubmit={handleAddWorkout} >
                 <div className='bg-zinc-600 flex flex-wrap w-full p-3 rounded mb-4'>
                   <label className="text-white text-lg">Workout Name</label>
+
                   <input
-                    className="form-input w-full outline-none background-transparent bg-zinc-900 text-white h-10 rounded-md mb-4 p-2"
+                    className={!formError ? "form-input w-full outline-none background-transparent bg-zinc-900 text-white h-10 rounded-md mb-4 p-2" : "placeholder:text-red-500 form-input w-full outline-none background-transparent bg-zinc-900 text-white h-10 rounded-md mb-4 p-2 border-2 border-red-500"}
                     name="workoutName"
                     type="list"
+                    placeholder={formError ? "Required" : null}
                     options="Strength,Hypertrophy,Endurance"
                     value={formState.workoutName}
                     onChange={handleFormChange}
@@ -117,7 +126,7 @@ export default function MyWorkouts() {
                   </select>
                   <label className="text-white text-lg">Workout Description</label>
                   <textarea
-                    className="form-input w-full outline-none background-transparent h-24 bg-zinc-900 text-whitea rounded-md resize-y p-2"
+                    className="form-input w-full outline-none background-transparent h-24 bg-zinc-900 text-white rounded-md resize-y p-2"
                     name="workoutDescription"
                     type="text"
                     value={formState.workoutDescription}
