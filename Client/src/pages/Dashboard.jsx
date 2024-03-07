@@ -31,6 +31,9 @@ const Dashboard = () => {
     variables: { userId: userId },
     pollInterval: 100
   })
+  if (error) {
+    window.location.assign('/login')
+  }
   const dashboardData = data?.getOneUserAccount || []
 
   const [deleteNote, { deleteError, deleteData }] = useMutation(DELETE_NOTE)

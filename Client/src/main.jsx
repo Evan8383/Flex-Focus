@@ -54,6 +54,7 @@ const router = createBrowserRouter([
   },{
     path: '/app',
     element: <App />,
+    errorElement: <Navigate to={'/login'}/>,
     children: [
       {
         index: true,
