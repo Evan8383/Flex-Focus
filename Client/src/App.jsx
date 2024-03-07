@@ -48,8 +48,8 @@ function App() {
     <ApolloProvider client={client}>
       <main className="main">
         {!token ? <Navigate to={'/login'} /> : <Outlet />}
-        <Nav/>
       </main>
+      <Nav />
     </ApolloProvider>
   )
 }

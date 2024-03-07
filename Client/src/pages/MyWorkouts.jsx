@@ -9,6 +9,10 @@ import { DELETE_WORKOUT, ADD_WORKOUT } from '../utils/mutations'
 
 export default function MyWorkouts() {
   const [showWorkoutModal, setShowWorkoutModal] = useState(false);
+  useEffect(() => {
+    setFormState({ workoutName: '', workoutCategory: '', workoutDescription: '' })
+  }, [showWorkoutModal])
+
   const [formState, setFormState] = useState({ workoutName: '', workoutCategory: '', workoutDescription: '' })
   const handleFormChange = (event) => {
     const { name, value } = event.target
@@ -39,6 +43,7 @@ export default function MyWorkouts() {
     try {
       const { data } = await addWorkout({ variables: { ...formState, userId: Auth.getUserAccount().data._id } })
       setShowWorkoutModal(false)
+      setFormState({ workoutName: '', workoutCategory: '', workoutDescription: '' })
     } catch (e) {
       console.error(e)
     }
@@ -46,7 +51,7 @@ export default function MyWorkouts() {
 
   return (
     <>
-      <div className="w-full gap-4 lg:gap-8 bg-zinc-900 h-screen text-white z-20">
+      <div className="w-full gap-4 lg:gap-8 bg-zinc-900 text-white z-20 overflow-scroll">
         <div className="mx-auto flex justify-between max-w-2xl">
           <div className="space-y-2 m-4">
             <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl">Your Workouts</h1>
