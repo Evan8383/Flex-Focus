@@ -38,3 +38,20 @@ export const DELETE_NOTE = gql`
   }
 }
 `
+
+export const DELETE_WORKOUT = gql`
+mutation Mutation($workoutId: ID!, $userId: ID!) {
+  deleteWorkout(workoutId: $workoutId, userId: $userId) {
+    _id
+  }
+}
+`
+
+export const ADD_WORKOUT = gql`
+mutation CreateNewWorkout($userId: ID!, $workoutName: String!, $workoutCategory: String, $workoutDescription: String) {
+  createNewWorkout(userId: $userId, workoutName: $workoutName, workoutCategory: $workoutCategory, workoutDescription: $workoutDescription) {
+    _id
+    workoutName
+  }
+}
+`

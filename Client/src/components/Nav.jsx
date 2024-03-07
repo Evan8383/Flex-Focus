@@ -9,7 +9,7 @@ const Nav = () => {
     }
 
     return (
-        <div className="fixed bottom-0 left-0 z-50 w-full h-16 bg-zinc-900">
+        <div className="fixed bottom-0 z-50 w-full h-16 bg-zinc-900">
             <div className="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
                 <Link to='/app/dashboard' className="flex flex-col items-center justify-center px-5 hover:bg-zinc-600">
                     <button type="button" className="flex flex-col items-center justify-center px-5 hover:bg-zinc-600 group">

@@ -1,9 +1,9 @@
 const { Schema, model } = require('mongoose');
 
-const validateWorkoutCategory = (workoutCategory) => {
-  const workoutCategoryRegex = /^(Strength|Hypertrophy|Endurance)$/;
-  return workoutCategoryRegex.test(workoutCategory);
-}
+// const validateWorkoutCategory = (workoutCategory) => {
+//   const workoutCategoryRegex = /^(Strength|Hypertrophy|Endurance)$/;
+//   return workoutCategoryRegex.test(workoutCategory);
+// }
 
 const assignedExerciseSchema = new Schema({
   exercise: {
@@ -38,7 +38,7 @@ const workoutSchema = new Schema({
   workoutCategory: {
     type: String,
     required: false,
-    validate: [validateWorkoutCategory, 'Workout category is not valid']
+    // validate: [validateWorkoutCategory, 'Workout category is not valid']
   },
   workoutDescription: {
     type: String,

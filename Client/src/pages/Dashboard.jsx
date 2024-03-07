@@ -54,8 +54,8 @@ const Dashboard = () => {
     <>
       <div className={!showModal ? 'bg-zinc-900 w-full m-auto p-10 h-screen' : 'pointer-events-none bg-zinc-900 w-full m-auto p-10 h-screen'}>
         <div className="flex mb-4">
-          <h1 className="text-orange-500 text-7xl">FLEX</h1>
-          <h1 className="text-white text-7xl">FOCUS</h1>
+          <h1 className="text-orange-500 text-5xl">FLEX</h1>
+          <h1 className="text-white text-5xl">FOCUS</h1>
         </div>
         <h4 className='text-white text-2xl font-semibold mb-4'>Welcome {dashboardData.username}</h4>
         <h2 className='text-white text-xl font-medium mb-2'>Workouts</h2>

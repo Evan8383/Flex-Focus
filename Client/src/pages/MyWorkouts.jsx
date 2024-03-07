@@ -1,12 +1,26 @@
 import Auth from '../utils/auth'
-import { useQuery } from '@apollo/client'
+import { disableExperimentalFragmentVariables, useQuery } from '@apollo/client'
 import { useState, useEffect } from 'react'
 import { useMutation } from '@apollo/client'
 import { Link, useParams } from 'react-router-dom'
 
 import { GET_WORKOUTS } from '../utils/queries'
+import { DELETE_WORKOUT, ADD_WORKOUT } from '../utils/mutations'
 
 export default function MyWorkouts() {
+  const [showWorkoutModal, setShowWorkoutModal] = useState(false);
+  useEffect(() => {
+    setFormState({ workoutName: '', workoutCategory: '', workoutDescription: '' })
+  }, [showWorkoutModal])
+
+
+  const [formState, setFormState] = useState({ workoutName: '', workoutCategory: '', workoutDescription: '' })
+  const handleFormChange = (event) => {
+    const { name, value } = event.target
+    setFormState({ ...formState, [name]: value })
+  }
+
+
   const userId = Auth.getUserAccount().data._id
   const { loading, data, error } = useQuery(GET_WORKOUTS, {
     variables: { userId: userId },
@@ -14,27 +28,54 @@ export default function MyWorkouts() {
   })
   const workoutData = data?.getOneUserAccount || []
 
-  let { workoutId } = useParams()
+  const [deleteWorkout, { deleteError, deleteData }] = useMutation(DELETE_WORKOUT)
+  const handleDeleteWorkout = async (event) => {
+    try {
+      const workoutId = event.target.getAttribute('workoutid')
+      const { data } = await deleteWorkout({ variables: { userId: userId, workoutId: workoutId } })
+    } catch (e) {
+      console.error(e)
+    }
+  }
 
+  const [formError, setFormError] = useState()
+
+  useEffect(() => {
+    setFormError(false)
+  }, [formState])
+
+  const [addWorkout, { addError, addData }] = useMutation(ADD_WORKOUT)
+  const handleAddWorkout = async (event) => {
+    event.preventDefault()
+    try {
+      const { data } = await addWorkout({ variables: { ...formState, userId: Auth.getUserAccount().data._id } })
+      setShowWorkoutModal(false)
+      setFormState({ workoutName: '', workoutCategory: '', workoutDescription: '' })
+    } catch (e) {
+      setFormError(true)
+      console.error('Form error')
+    }
+  }
+
+
+  if (loading) return <div className='bg-zinc-900 text-white'>Loading...</div>
   return (
     <>
-      <div className="w-full gap-4 lg:gap-8 bg-zinc-900 h-screen text-white z-20">
+      <div className="w-full gap-4 lg:gap-8 bg-zinc-900 text-white">
         <div className="mx-auto flex justify-between max-w-2xl">
           <div className="space-y-2 m-4">
             <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl">Your Workouts</h1>
-            <button className="w-full h-12 b text-white bg-orange-500 rounded-md shadow-md transition-colors">
+            <button onClick={() => setShowWorkoutModal(true)} className="w-full h-12 b text-white bg-orange-500 rounded-md shadow-md transition-colors">
               Add Workout
             </button>
           </div>
           <img className='w-24 h-24 my-auto mr-4' src="../images/FlexLogo.png" alt="" />
         </div>
         {loading ? <div>Loading...</div> : null}
-
-
         {workoutData.workouts.length ? workoutData.workouts.map((workout) => (
-          <div key={workout._id} className="z-50 mx-auto grid max-w-2xl gap-4 px-4 cursor-pointer min-w-full mb-4 z-10">
+          <div key={workout._id} className="z-50 mx-auto grid max-w-2xl gap-4 px-4  min-w-full mb-4 z-10">
             <Link to={`/app/workouts/${workout._id}`}>
-              <div className="rounded-xl border overflow-hidden divide-y bg-zinc-600">
+              <div className="rounded-xl border overflow-hidden divide-y bg-zinc-600 cursor-pointer">
                 <div className="flex items-center p-4">
                   <h2 className="font-bold">{workout.workoutName}</h2>
                   <p className="ml-auto text-sm white">{workout.workoutCategory ? workout.workoutCategory : 'Uncategorized'}</p>
@@ -46,13 +87,65 @@ export default function MyWorkouts() {
                 </div>
               </div>
             </Link>
-            <div className='flex justify-around'>
-              <button className='py-2 px-5 bg-zinc-600 rounded'>Details</button>
-              <button className='py-2 px-5 bg-orange-500 rounded'>Delete</button>
+            <div className='flex justify-start'>
+              <button onClick={handleDeleteWorkout} workoutid={workout._id} className='py-2 px-5 bg-orange-500 rounded'>Delete</button>
             </div>
           </div>
         )) : <div className="mx-auto flex min-h-[400px] items-center justify-center p-4">No workouts to display</div>}
-      </div >
+      </div>
+      {/* Modal/form */}
+      {showWorkoutModal ? (
+        <div className='w-full h-screen absolute top-0 bg-zinc-900 text-white p-10'>
+          <div>
+            <div className='bg-orange-500 bg-zinc-500 p-2 rounded'>
+              <h2 className='text-2xl font-bold mb-2'>New Workout:</h2>
+              <form onSubmit={handleAddWorkout} >
+                <div className='bg-zinc-600 flex flex-wrap w-full p-3 rounded mb-4'>
+                  <label className="text-white text-lg">Workout Name</label>
+
+                  <input
+                    className={!formError ? "form-input w-full outline-none background-transparent bg-zinc-900 text-white h-10 rounded-md mb-4 p-2" : "placeholder:text-red-500 form-input w-full outline-none background-transparent bg-zinc-900 text-white h-10 rounded-md mb-4 p-2 border-2 border-red-500"}
+                    name="workoutName"
+                    type="list"
+                    placeholder={formError ? "Required" : null}
+                    options="Strength,Hypertrophy,Endurance"
+                    value={formState.workoutName}
+                    onChange={handleFormChange}
+                  ></input>
+                  <label className="text-white text-lg">Workout Category</label>
+                  <select
+                    className="form-input w-full outline-none background-transparent bg-zinc-900 text-white h-10 rounded-md mb-4 p-2"
+                    name="workoutCategory"
+                    value={formState.workoutCategory}
+                    onChange={handleFormChange}
+                  >
+                    <option></option>
+                    <option value="Strength">Strength</option>
+                    <option value="Hypertrophy">Hypertrophy</option>
+                    <option value="Endurance">Endurance</option>
+                  </select>
+                  <label className="text-white text-lg">Workout Description</label>
+                  <textarea
+                    className="form-input w-full outline-none background-transparent h-24 bg-zinc-900 text-white rounded-md resize-y p-2"
+                    name="workoutDescription"
+                    type="text"
+                    value={formState.workoutDescription}
+                    onChange={handleFormChange}
+                  ></textarea>
+                </div>
+                <div className='flex justify-between'>
+                  <div >
+                    <button className='bg-blue-500 mr-auto px-4 py-1 rounded' type="submit">Submit</button>
+                  </div>
+                  <div >
+                    <button className='bg-orange-500 px-4 py-1 rounded' type='button' onClick={() => setShowWorkoutModal(false)}>Close</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </>
   )
 }

@@ -46,10 +46,10 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-      <main className="main">
+      <main className="main mb-24">
         {!token ? <Navigate to={'/login'} /> : <Outlet />}
-        <Nav/>
       </main>
+      <Nav />
     </ApolloProvider>
   )
 }
