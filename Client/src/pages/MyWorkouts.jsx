@@ -51,7 +51,7 @@ export default function MyWorkouts() {
 
   return (
     <>
-      <div className="w-full gap-4 lg:gap-8 bg-zinc-900 text-white z-20 overflow-scroll">
+      <div className="w-full gap-4 lg:gap-8 bg-zinc-900 text-white">
         <div className="mx-auto flex justify-between max-w-2xl">
           <div className="space-y-2 m-4">
             <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl">Your Workouts</h1>
@@ -83,7 +83,7 @@ export default function MyWorkouts() {
             </div>
           </div>
         )) : <div className="mx-auto flex min-h-[400px] items-center justify-center p-4">No workouts to display</div>}
-      </div >
+      </div>
 
       {showWorkoutModal ? (
         <div className={'w-full h-screen bg-white absolute top-0 '}>
