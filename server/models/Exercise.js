@@ -5,20 +5,13 @@ const exerciseSchema = new Schema({
         type: String,
         required: true
     },
-    category : {
-        type: String,
-        required: true
-    },
     muscleGroup : {
         type: String,
         required: true
     },
-    subMuscleGroup : {
-        type: String
-    },
     description : {
         type: String,
-        required: true
+        required: false
     }
 });
 
