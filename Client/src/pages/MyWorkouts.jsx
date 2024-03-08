@@ -6,6 +6,7 @@ import { Link, useParams } from 'react-router-dom'
 
 import { GET_WORKOUTS } from '../utils/queries'
 import { DELETE_WORKOUT, ADD_WORKOUT } from '../utils/mutations'
+import Logo from '/images/FlexLogo.png'
 
 export default function MyWorkouts() {
   const [showWorkoutModal, setShowWorkoutModal] = useState(false);
@@ -69,7 +70,7 @@ export default function MyWorkouts() {
               Add Workout
             </button>
           </div>
-          <img className='w-24 h-24 my-auto mr-4' src="../images/FlexLogo.png" alt="" />
+          <img className='w-24 h-24 my-auto mr-4' src={Logo} alt="" />
         </div>
         {loading ? <div>Loading...</div> : null}
         {workoutData.workouts.length ? workoutData.workouts.map((workout) => (

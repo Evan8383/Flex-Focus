@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import BuffDude from '/images/buff-dude.png'
+
 
 const Home = () => {
   return (
@@ -15,7 +17,7 @@ const Home = () => {
           <div className="max-md:hidden absolute bottom-0">
             <img
               className="md:w-2/5 md:ml-16 lg:w-1/4 lg:ml-32"
-              src="../images/buff-dude.png"
+              src={BuffDude}
               alt="buff-dude"
             />
           </div>

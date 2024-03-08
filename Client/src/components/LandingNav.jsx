@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import Logo from '/images/FlexLogo.png';
 
 const LandingNav = () => {
     const location = useLocation();
@@ -28,7 +29,7 @@ const LandingNav = () => {
     const renderDesktopNav = () => (
         <div className="container mx-auto flex justify-between items-center p-4">
             <Link to="/">
-            <img src="../images/FlexLogo.png" alt="Logo" className='object-scale-down h-16' />
+            <img src={Logo} alt="Logo" className='object-scale-down h-16' />
             </Link>
             <ul className="flex space-x-8 items-center">
                 <li className={`text-white ${isNavLinkActive('/') ? 'underline underline-offset-8 decoration-orange-500 decoration-4 font-bold' : 'hover:text-gray-300'}`}>
