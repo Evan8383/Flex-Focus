@@ -63,16 +63,16 @@ const Dashboard = () => {
             <h2 className="text-white text-xl font-medium mb-2 hover:shadow transition-all hover:translate-x-4 hover:text-orange-500 w-fit">My Workouts</h2>
           </Link>
           {dashboardData.workouts.length ? dashboardData.workouts.map((workout) => (
-            
+
             // *Copy this styling
             <Link to={`/app/workouts/${workout._id}`}>
               <div key={workout._id} className='text-white mb-2'>
                 <div className='bg-zinc-600 p-2 rounded'>
                   <div className="flex justify-between border-b-2 mb-2">
                     <h3 className='text-xl font-medium mb-2'>{workout.workoutName}</h3>
-                    <p>{workout.workoutCategory? workout.workoutCategory: "Uncategorized"}</p>
+                    <p>{workout.workoutCategory ? workout.workoutCategory : "Uncategorized"}</p>
                   </div>
-                  <p>{workout.workoutDescription? workout.workoutDescription: "No description"}</p>
+                  <p>{workout.workoutDescription ? workout.workoutDescription : "No description"}</p>
                 </div>
               </div>
             </Link>
@@ -86,16 +86,16 @@ const Dashboard = () => {
         </div>
         <div className=''>
           <h3 className='text-white text-xl font-medium mb-2'>Notes to self</h3>
-          <button onClick={() => setShowModal(true)} className='text-white bg-orange-500 px-2 py-1 rounded mb-4'>Add Note</button>
+          <button onClick={() => setShowModal(true)} className='text-white bg-orange-500 px-2 py-1 rounded mb-4 hover:bg-orange-600 hover:shadow-md transition-all'>Add Note</button>
         </div>
         {dashboardData.notes.length ? dashboardData.notes.map((note) => (
-          <div className='flex justify-between bg-zinc-600 mb-2 p-2 rounded' key={note._id}>
-            <div>
-              <h3 className='text-white '>{note.noteTitle}</h3>
+          <div className='text-white mb-2' key={note._id}>
+            <div className='bg-zinc-600 p-2 rounded'>
+              <div className="flex justify-between border-b-2 mb-2">
+                <h3 className='text-xl font-medium mb-2'>{note.noteTitle}</h3>
+                <button onClick={handleDeleteNote} note={note._id} className='text-white bg-orange-500 text-center mb-2 px-1 rounded hover:bg-orange-600 transition-all'>Delete</button>
+              </div>
               <p className='text-white'>{note.noteBody}</p>
-            </div>
-            <div className='my-auto p-1'>
-              <button onClick={handleDeleteNote} note={note._id} className='text-white bg-orange-500 text-center px-1 rounded text-lg'>Delete</button>
             </div>
           </div>
         )) : <p className='text-white text-center'>No notes to display</p>}
