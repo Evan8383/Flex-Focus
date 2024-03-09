@@ -63,12 +63,16 @@ const Dashboard = () => {
             <h2 className="text-white text-xl font-medium mb-2 hover:shadow transition-all hover:translate-x-4 hover:text-orange-500 w-fit">My Workouts</h2>
           </Link>
           {dashboardData.workouts.length ? dashboardData.workouts.map((workout) => (
+            
+            // *Copy this styling
             <Link to={`/app/workouts/${workout._id}`}>
-              <div key={workout._id} className='text-white text-xl font-medium mb-2'>
+              <div key={workout._id} className='text-white mb-2'>
                 <div className='bg-zinc-600 p-2 rounded'>
-                  <h3>{workout.workoutName}</h3>
-                  <p>{workout.workoutCategory}</p>
-                  <p>{workout.workoutDescription}</p>
+                  <div className="flex justify-between border-b-2 mb-2">
+                    <h3 className='text-xl font-medium mb-2'>{workout.workoutName}</h3>
+                    <p>{workout.workoutCategory? workout.workoutCategory: "Uncategorized"}</p>
+                  </div>
+                  <p>{workout.workoutDescription? workout.workoutDescription: "No description"}</p>
                 </div>
               </div>
             </Link>
