@@ -15,17 +15,17 @@ const ExerciseFilter = (props) => {
   props.setMuscleGroup(isSelected)
   // console.log(isSelected)
   return (
-    <div className='text-white p-2'>
-      <button onClick={handleSelect} className={props.muscleGroup.includes('All')?'text-green-500 p-2' : 'text-zinc-500 p-2'}>All</button>
-      <button onClick={handleSelect} className={props.muscleGroup.includes('Chest')?'text-green-500 p-2' : 'text-zinc-500 p-2'}>Chest</button>
-      <button onClick={handleSelect} className={props.muscleGroup.includes('Back')?'text-green-500 p-2' : 'text-zinc-500 p-2'}>Back</button>
-      <button onClick={handleSelect} className={props.muscleGroup.includes('Shoulders')?'text-green-500 p-2' : 'text-zinc-500 p-2'}>Shoulders</button>
-      <button onClick={handleSelect} className={props.muscleGroup.includes('Triceps')?'text-green-500 p-2' : 'text-zinc-500 p-2'}>Triceps</button>
-      <button onClick={handleSelect} className={props.muscleGroup.includes('Biceps')?'text-green-500 p-2' : 'text-zinc-500 p-2'}>Biceps</button>
-      <button onClick={handleSelect} className={props.muscleGroup.includes('Quads')?'text-green-500 p-2' : 'text-zinc-500 p-2'}>Quads</button>
-      <button onClick={handleSelect} className={props.muscleGroup.includes('Hamstrings')?'text-green-500 p-2' : 'text-zinc-500 p-2'}>Hamstrings</button>
-      <button onClick={handleSelect} className={props.muscleGroup.includes('Calves')?'text-green-500 p-2' : 'text-zinc-500 p-2'}>Calves</button>
-      <button onClick={handleSelect} className={props.muscleGroup.includes('Glutes')?'text-green-500 p-2' : 'text-zinc-500 p-2'}>Glutes</button>
+    <div className="text-white flex flex-wrap justify-center">
+      <button onClick={handleSelect} className={props.muscleGroup.includes('Chest')?'bg-orange-500 px-1 rounded m-1' : 'bg-zinc-600 px-1 rounded m-1'}>Chest</button>
+      <button onClick={handleSelect} className={props.muscleGroup.includes('Back')?'bg-orange-500 px-1 rounded m-1' : 'bg-zinc-600 px-1 rounded m-1'}>Back</button>
+      <button onClick={handleSelect} className={props.muscleGroup.includes('Shoulders')?'bg-orange-500 px-1 rounded m-1' : 'bg-zinc-600 px-1 rounded m-1'}>Shoulders</button>
+      <button onClick={handleSelect} className={props.muscleGroup.includes('Triceps')?'bg-orange-500 px-1 rounded m-1' : 'bg-zinc-600 px-1 rounded m-1'}>Triceps</button>
+      <button onClick={handleSelect} className={props.muscleGroup.includes('Biceps')?'bg-orange-500 px-1 rounded m-1' : 'bg-zinc-600 px-1 rounded m-1'}>Biceps</button>
+      <button onClick={handleSelect} className={props.muscleGroup.includes('Quads')?'bg-orange-500 px-1 rounded m-1' : 'bg-zinc-600 px-1 rounded m-1'}>Quads</button>
+      <button onClick={handleSelect} className={props.muscleGroup.includes('Hamstrings')?'bg-orange-500 px-1 rounded m-1' : 'bg-zinc-600 px-1 rounded m-1'}>Hamstrings</button>
+      <button onClick={handleSelect} className={props.muscleGroup.includes('Calves')?'bg-orange-500 px-1 rounded m-1' : 'bg-zinc-600 px-1 rounded m-1'}>Calves</button>
+      <button onClick={handleSelect} className={props.muscleGroup.includes('Glutes')?'bg-orange-500 px-1 rounded m-1' : 'bg-zinc-600 px-1 rounded m-1'}>Glutes</button>
+      <button onClick={handleSelect} className={props.muscleGroup.includes('All')?'bg-orange-500 px-1 rounded m-1' : 'bg-zinc-600 px-1 rounded m-1'}>All</button>
     </div>
   )
 }

@@ -30,19 +30,22 @@ const Exercises = () => {
   }
   return (
     <>
-      <ExerciseFilter setMuscleGroup={setMuscleGroup} muscleGroup={muscleGroup} />
-      {!results.length ? <div className='text-white'> select a category</div>: null}
-      {results.map((exercise) => {
-        return (
-          <>
-            <div key={exercise._id} className='text-white p-2'>
-              <h1>{exercise.name}</h1>
-              <h2>{exercise.muscleGroup}</h2>
-              <p>{exercise.description}</p>
-            </div>
-          </>
-        )
-      })}
+      <div className='p-10'>
+        <ExerciseFilter setMuscleGroup={setMuscleGroup} muscleGroup={muscleGroup} />
+        {!results.length ? <div className='text-white'> select a category</div> : results.map((exercise) => {
+          return (
+            <>
+              <Link to={`/app/exercises/${exercise._id}`}>
+                <div key={exercise._id} className='text-white p-2 bg-zinc-600 mb-2 rounded'>
+                  <h1>{exercise.name}</h1>
+                  <h2>{exercise.muscleGroup}</h2>
+                  <p className='truncate'>{exercise.description}</p>
+                </div>
+              </Link>
+            </>
+          )
+        })}
+      </div>
     </>
   )
 }
