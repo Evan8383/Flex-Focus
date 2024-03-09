@@ -87,10 +87,10 @@ export default function MyWorkouts() {
                   </p>
                 </div>
               </div>
+            </Link>
               <div className='flex justify-start'>
                 <button onClick={handleDeleteWorkout} workoutid={workout._id} className=' text-center px-2 bg-orange-500 rounded hover:bg-orange-600 transition-all'>Delete</button>
               </div>
-            </Link>
           </div>
         )) : <div className="mx-auto flex min-h-[400px] items-center justify-center p-4">No workouts to display</div>}
       </div>
