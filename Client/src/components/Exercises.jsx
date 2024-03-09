@@ -32,16 +32,23 @@ const Exercises = () => {
     <>
       <div className='p-10'>
         <ExerciseFilter setMuscleGroup={setMuscleGroup} muscleGroup={muscleGroup} />
-        {!results.length ? <div className='text-white'> select a category</div> : results.map((exercise) => {
+        {!results.length ? <div className='text-white m-auto w-fit mt-10'>Select a category to view exercises</div> : results.map((exercise) => {
           return (
             <>
-              <Link to={`/app/exercises/${exercise._id}`}>
-                <div key={exercise._id} className='text-white p-2 bg-zinc-600 mb-2 rounded'>
-                  <h1>{exercise.name}</h1>
-                  <h2>{exercise.muscleGroup}</h2>
-                  <p className='truncate'>{exercise.description}</p>
+              <div>
+                <Link to={`/app/exercises/${exercise._id}`}>
+                  <div key={exercise._id} className='text-white p-2 bg-zinc-600 rounded'>
+                    <div className='flex justify-between border-b-2 mb-2'>
+                      <h1>{exercise.name}</h1>
+                      <h2>{exercise.muscleGroup}</h2>
+                    </div>
+                    <p className='truncate'>{exercise.description}</p>
+                  </div>
+                </Link>
+                <div className='w-fit mb-2 mt-1'>
+                  <button className='text-white bg-orange-500 rounded px-1 cursor-pointer'>Assign</button>
                 </div>
-              </Link>
+              </div>
             </>
           )
         })}
