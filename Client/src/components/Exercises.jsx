@@ -16,12 +16,13 @@ const Exercises = () => {
   const exerciseDataResults = exerciseData?.getAllExercises || []
   console.log(exerciseDataResults)
 
-  const [muscleGroup, setMuscleGroup] = useState(['Chest'])
+  const [muscleGroup, setMuscleGroup] = useState(['All'])
   // console.log(muscleGroup)
   let results = exerciseDataResults.filter(exercise => muscleGroup.includes(exercise.muscleGroup))
   if (muscleGroup.includes('All')) {
     results = exerciseDataResults
   }
+  console.log(muscleGroup)
   console.log(results)
 
   if (loadingExercises) {
@@ -29,12 +30,21 @@ const Exercises = () => {
   }
   return (
     <>
-    <ExerciseFilter setMuscleGroup={setMuscleGroup}/>
-    <p>h1</p>
-    
-    
+      <ExerciseFilter setMuscleGroup={setMuscleGroup} muscleGroup={muscleGroup} />
+      {!results.length ? <div className='text-white'> select a category</div>: null}
+      {results.map((exercise) => {
+        return (
+          <>
+            <div key={exercise._id} className='text-white p-2'>
+              <h1>{exercise.name}</h1>
+              <h2>{exercise.muscleGroup}</h2>
+              <p>{exercise.description}</p>
+            </div>
+          </>
+        )
+      })}
     </>
-    )
+  )
 }
 
 export default Exercises
