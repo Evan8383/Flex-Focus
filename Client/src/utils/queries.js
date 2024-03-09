@@ -18,8 +18,7 @@ query GetOneUserAccount($userId: ID!) {
       workoutNotes
     }
     }
-  }
-`
+  }`
 
 export const GET_WORKOUTS = gql`
 query GetOneUserAccount($userId: ID!) {
@@ -33,5 +32,31 @@ query GetOneUserAccount($userId: ID!) {
       workoutName
     }
   }
-}
-` 
+}`
+
+export const GET_USER_WORKOUT_DATA = gql`
+query GetOneUserAccount($userId: ID!) {
+  getOneUserAccount(userId: $userId) {
+    _id
+    workouts {
+      workoutName
+      workoutCategory
+      assignedExercises {
+        name
+        muscleGroup
+        description
+        _id
+      }
+    }
+  }
+}`
+
+export const GET_ALL_EXERCISES = gql`
+query GetAllExercises {
+  getAllExercises {
+    _id
+    description
+    muscleGroup
+    name
+  }
+}`

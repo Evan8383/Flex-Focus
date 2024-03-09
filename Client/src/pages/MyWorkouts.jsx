@@ -1,5 +1,5 @@
 import Auth from '../utils/auth'
-import { disableExperimentalFragmentVariables, useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import { useState, useEffect } from 'react'
 import { useMutation } from '@apollo/client'
 import { Link, useParams } from 'react-router-dom'

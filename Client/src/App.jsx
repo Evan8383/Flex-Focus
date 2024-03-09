@@ -8,8 +8,6 @@ import { setContext } from '@apollo/client/link/context';
 import { Outlet, Navigate } from 'react-router-dom'
 import './index.css'
 
-import Header from './components/Header';
-import Footer from './components/Footer';
 import Nav from './components/Nav';
 
 import decode from 'jwt-decode';
