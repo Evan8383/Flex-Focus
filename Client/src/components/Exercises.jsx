@@ -14,7 +14,7 @@ const Exercises = () => {
   // console.log(workoutDataResults)
   const { loading: loadingExercises, data: exerciseData, error: exerciseError } = useQuery(GET_ALL_EXERCISES)
   const exerciseDataResults = exerciseData?.getAllExercises || []
-  console.log(exerciseDataResults)
+  // console.log(exerciseDataResults)
 
   const [muscleGroup, setMuscleGroup] = useState(['All'])
   // console.log(muscleGroup)
@@ -22,9 +22,8 @@ const Exercises = () => {
   if (muscleGroup.includes('All')) {
     results = exerciseDataResults
   }
-  console.log(muscleGroup)
-  console.log(results)
-
+  // console.log(muscleGroup)
+  // console.log(results)
   if (loadingExercises) {
     return <div>Loading...</div>
   }
