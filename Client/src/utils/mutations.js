@@ -64,3 +64,13 @@ mutation Mutation($workoutId: ID!, $exerciseId: ID!) {
   }
 }
 `
+
+export const REMOVE_EXERCISE = gql`
+mutation RemoveExercise($workoutId: ID!, $exerciseId: ID!) {
+  removeExercise(workoutId: $workoutId, exerciseId: $exerciseId) {
+    assignedExercises {
+      name
+    }
+  }
+}
+`
