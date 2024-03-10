@@ -76,32 +76,34 @@ const Exercises = () => {
       <div className='p-10 mb-40'>
         {showAssignModal ? (
           <>
-            <div className="">
-              <div className="relative top-0 w-full bg-zinc-900">
-                {workoutDataResults.map((workout) => {
-                  return (
-                    <div key={workout._id} className='text-white bg-zinc-900 p-2 rounded cursor-pointer'>
-                      <h1>{workout.workoutName}</h1>
-                      <h2>Exercises assigned to Workout</h2>
-                      {workout.assignedExercises ? workout.assignedExercises.map((exercise) => {
+            <div className="w-full gap-4 bg-zinc-900 text-white min-h-fit mb-24">
+              {workoutDataResults.map((workout) => {
+                return (
+                  <div key={workout._id} className="mb-2 rounded overflow-hidden divide-y bg-zinc-600 cursor-pointer transition-all">
+                    <div className="flex items-center p-2">
+                      <h2 className="text-xl font-medium mb-2">{workout.workoutName}</h2>
+                      <button onClick={handleAssignExercise} workoutId={workout._id} className="ml-auto text-center px-2 bg-orange-500 rounded hover:bg-orange-600 transition-all">Assign</button>
+                    </div>
+                    <div className="p-2">
+                      {workout.assignedExercises.length ? <h3>Exercises assigned to this Workout:</h3> : null }
+                      {workout.assignedExercises.length ? workout.assignedExercises.map((exercise) => {
                         return (
-                          <div key={exercise._id}>
-                            <p>{exercise.name}</p>
+                          <div className='mt-1' key={exercise._id}>
+                            <p>-> {exercise.name}</p>
                           </div>
                         )
-                      }) : null}
-
-                      <button onClick={handleAssignExercise} workoutId={workout._id} className='text-white bg-orange-500 rounded px-1 cursor-pointer'>Assign</button>
+                      }) : <div><p>No exercises assigned to this workout</p>
+                      </div>}
                     </div>
-                  )
-                })}
-                <button onClick={handleCloseModal} className='text-white'>Close</button>
-              </div>
+                  </div>
+                )
+              })}
+              <button onClick={handleCloseModal} className="text-white">Close</button>
             </div>
           </>
         ) : null}
 
-        {!showAssignModal ? <ExerciseFilter setMuscleGroup={setMuscleGroup} muscleGroup={muscleGroup} />: null}
+        {!showAssignModal ? <ExerciseFilter setMuscleGroup={setMuscleGroup} muscleGroup={muscleGroup} /> : null}
         {!results.length && !showAssignModal ? <div className='text-white m-auto w-fit mt-10'>Select a category to view exercises</div> : results.map((exercise) => {
           return (
             <>
