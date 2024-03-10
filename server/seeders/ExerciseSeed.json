@@ -16,5 +16,95 @@
         "category": "Abs",
         "muscleGroup": "Abs",
         "description": "Sit up"
-    }
+    },
+    {
+        "name": "Push-up",
+        "category": "Bodyweight",
+        "muscleGroup": "Chest",
+        "description": "A classic bodyweight exercise that targets the chest, shoulders, and triceps."
+      },
+      {
+        "name": "Squat",
+        "category": "Strength",
+        "muscleGroup": "Legs",
+        "description": "A fundamental lower body exercise that targets the quadriceps, hamstrings, and glutes."
+      },
+      {
+        "name": "Pull-up",
+        "category": "Bodyweight",
+        "muscleGroup": "Back",
+        "description": "An upper body exercise that targets the muscles in the back, particularly the latissimus dorsi."
+      },
+      {
+        "name": "Plank",
+        "category": "Core",
+        "muscleGroup": "Abdominals",
+        "description": "A core-strengthening exercise that engages the muscles in the abdomen, lower back, and shoulders."
+      },
+      {
+        "name": "Bicep Curl",
+        "category": "Strength",
+        "muscleGroup": "Arms",
+        "description": "An isolation exercise for the biceps, focusing on elbow flexion."
+      },
+      {
+        "name": "Deadlift",
+        "category": "Strength",
+        "muscleGroup": "Legs",
+        "description": "A compound exercise that targets the muscles in the lower body, back, and core."
+      },
+      {
+        "name": "Dumbbell Row",
+        "category": "Strength",
+        "muscleGroup": "Back",
+        "description": "An upper body exercise that targets the muscles in the back, particularly the latissimus dorsi."
+      },
+      {
+        "name": "Lunge",
+        "category": "Strength",
+        "muscleGroup": "Legs",
+        "description": "A lower body exercise that targets the quadriceps, hamstrings, and glutes."
+      },
+      {
+        "name": "Tricep Dip",
+        "category": "Bodyweight",
+        "muscleGroup": "Arms",
+        "description": "An upper body exercise that targets the triceps."
+      },
+      {
+        "name": "Russian Twist",
+        "category": "Core",
+        "muscleGroup": "Abdominals",
+        "description": "A core-strengthening exercise that engages the muscles in the abdomen and obliques."
+      },
+      {
+        "name": "Shoulder Press",
+        "category": "Strength",
+        "muscleGroup": "Shoulders",
+        "description": "An upper body exercise that targets the muscles in the shoulders."
+      },
+      {
+        "name": "Calf Raise",
+        "category": "Strength",
+        "muscleGroup": "Legs",
+        "description": "An isolation exercise for the calf muscles, focusing on ankle plantar flexion."
+      },
+      {
+        "name": "Leg Curl",
+        "category": "Strength",
+        "muscleGroup": "Legs",
+        "description": "An isolation exercise for the hamstrings, focusing on knee flexion."
+      },
+      {
+        "name": "Leg Extension",
+        "category": "Strength",
+        "muscleGroup": "Legs",
+        "description": "An isolation exercise for the quadriceps, focusing on knee extension."
+      },
+      {
+        "name": "Lat Pulldown",
+        "category": "Strength",
+        "muscleGroup": "Back",
+        "description": "An upper body exercise that targets the muscles in the back, particularly the lat"
+        }
 ]
