@@ -62,7 +62,7 @@ export default function MyWorkouts() {
   if (loading) return <div className='bg-zinc-900 text-white'>Loading...</div>
   return (
     <>
-      <div className="w-full gap-4 lg:gap-8 bg-zinc-900 text-white p-10">
+      <div className="w-full gap-4 bg-zinc-900 text-white p-10 min-h-screen mb-24">
         <div className="mx-auto flex justify-between max-w-2xl mb-6">
           <div className="space-y-2">
             <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl">Your Workouts</h1>
@@ -96,7 +96,7 @@ export default function MyWorkouts() {
       </div>
       {/* Modal/form */}
       {showWorkoutModal ? (
-        <div className='w-full h-screen absolute top-0 bg-zinc-900 text-white p-10'>
+        <div className='w-full min-h-screen absolute top-0 bg-zinc-900 text-white p-10'>
           <div>
             <div className='bg-orange-500 bg-zinc-500 p-2 rounded'>
               <h2 className='text-2xl font-bold mb-2'>New Workout:</h2>
