@@ -19,7 +19,7 @@ const Exercises = () => {
   const exerciseDataResults = exerciseData?.getAllExercises || []
   console.log(exerciseDataResults)
 
-  const [muscleGroup, setMuscleGroup] = useState(['All'])
+  const [muscleGroup, setMuscleGroup] = useState([])
   // console.log(muscleGroup)
   let results = exerciseDataResults.filter(exercise => muscleGroup.includes(exercise.muscleGroup))
   if (muscleGroup.includes('All')) {
@@ -74,8 +74,35 @@ const Exercises = () => {
   return (
     <>
       <div className='p-10 mb-40'>
-        <ExerciseFilter setMuscleGroup={setMuscleGroup} muscleGroup={muscleGroup} />
-        {!results.length ? <div className='text-white m-auto w-fit mt-10'>Select a category to view exercises</div> : results.map((exercise) => {
+        {showAssignModal ? (
+          <>
+            <div className="">
+              <div className="relative top-0 w-full bg-zinc-900">
+                {workoutDataResults.map((workout) => {
+                  return (
+                    <div key={workout._id} className='text-white bg-zinc-900 p-2 rounded cursor-pointer'>
+                      <h1>{workout.workoutName}</h1>
+                      <h2>Exercises assigned to Workout</h2>
+                      {workout.assignedExercises ? workout.assignedExercises.map((exercise) => {
+                        return (
+                          <div key={exercise._id}>
+                            <p>{exercise.name}</p>
+                          </div>
+                        )
+                      }) : null}
+
+                      <button onClick={handleAssignExercise} workoutId={workout._id} className='text-white bg-orange-500 rounded px-1 cursor-pointer'>Assign</button>
+                    </div>
+                  )
+                })}
+                <button onClick={handleCloseModal} className='text-white'>Close</button>
+              </div>
+            </div>
+          </>
+        ) : null}
+
+        {!showAssignModal ? <ExerciseFilter setMuscleGroup={setMuscleGroup} muscleGroup={muscleGroup} />: null}
+        {!results.length && !showAssignModal ? <div className='text-white m-auto w-fit mt-10'>Select a category to view exercises</div> : results.map((exercise) => {
           return (
             <>
               <div>
@@ -95,33 +122,8 @@ const Exercises = () => {
             </>
           )
         })}
-      </div>
-      {showAssignModal ? (
-        <>
-          <div className="flex flex-grow mb-40">
-            <div className="top-0 absolute w-full bg-zinc-900 p-10 mb-56">
-              {workoutDataResults.map((workout) => {
-                return (
-                  <div key={workout._id} className='text-white bg-zinc-900 p-2 rounded cursor-pointer'>
-                    <h1>{workout.workoutName}</h1>
-                    <h2>Exercises assigned to Workout</h2>
-                    {workout.assignedExercises ? workout.assignedExercises.map((exercise) => {
-                      return (
-                        <div key={exercise._id}>
-                          <p>{exercise.name}</p>
-                        </div>
-                      )
-                    }) : null}
 
-                    <button onClick={handleAssignExercise} workoutId={workout._id} className='text-white bg-orange-500 rounded px-1 cursor-pointer'>Assign</button>
-                  </div>
-                )
-              })}
-              <button onClick={handleCloseModal} className='text-white'>Close</button>
-            </div>
-          </div>
-        </>
-      ) : null}
+      </div>
     </>
   )
 }
