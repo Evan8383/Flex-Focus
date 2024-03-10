@@ -55,3 +55,12 @@ mutation CreateNewWorkout($userId: ID!, $workoutName: String!, $workoutCategory:
   }
 }
 `
+
+export const ASSIGN_EXERCISE = gql`
+mutation Mutation($workoutId: ID!, $exerciseId: ID!) {
+  addExercise(workoutId: $workoutId, exerciseId: $exerciseId) {
+    _id
+    workoutName
+  }
+}
+`

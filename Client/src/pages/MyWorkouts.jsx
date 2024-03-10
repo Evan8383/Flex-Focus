@@ -1,5 +1,5 @@
 import Auth from '../utils/auth'
-import { disableExperimentalFragmentVariables, useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import { useState, useEffect } from 'react'
 import { useMutation } from '@apollo/client'
 import { Link, useParams } from 'react-router-dom'
@@ -62,41 +62,41 @@ export default function MyWorkouts() {
   if (loading) return <div className='bg-zinc-900 text-white'>Loading...</div>
   return (
     <>
-      <div className="w-full gap-4 lg:gap-8 bg-zinc-900 text-white">
-        <div className="mx-auto flex justify-between max-w-2xl">
-          <div className="space-y-2 m-4">
+      <div className="w-full gap-4 bg-zinc-900 text-white p-10 min-h-screen mb-24">
+        <div className="mx-auto flex justify-between max-w-2xl mb-6">
+          <div className="space-y-2">
             <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl">Your Workouts</h1>
-            <button onClick={() => setShowWorkoutModal(true)} className="w-full h-12 b text-white bg-orange-500 rounded-md shadow-md transition-colors">
+            <button onClick={() => setShowWorkoutModal(true)} className="w-full h-12 text-white bg-orange-500 text-xl font-medium rounded-md shadow-md hover:bg-orange-600 transition-all">
               Add Workout
             </button>
           </div>
-          <img className='w-24 h-24 my-auto mr-4' src={Logo} alt="" />
+          <img className='w-24 h-24 my-auto' src={Logo} alt="" />
         </div>
         {loading ? <div>Loading...</div> : null}
         {workoutData.workouts.length ? workoutData.workouts.map((workout) => (
-          <div key={workout._id} className="z-50 mx-auto grid max-w-2xl gap-4 px-4  min-w-full mb-4 z-10">
+          <div key={workout._id} className="mb-2 ">
             <Link to={`/app/workouts/${workout._id}`}>
-              <div className="rounded-xl border overflow-hidden divide-y bg-zinc-600 cursor-pointer">
-                <div className="flex items-center p-4">
-                  <h2 className="font-bold">{workout.workoutName}</h2>
+              <div className="rounded overflow-hidden divide-y bg-zinc-600 cursor-pointer transition-all">
+                <div className="flex items-center p-2">
+                  <h2 className="text-xl font-medium mb-2">{workout.workoutName}</h2>
                   <p className="ml-auto text-sm white">{workout.workoutCategory ? workout.workoutCategory : 'Uncategorized'}</p>
                 </div>
-                <div className="p-4">
+                <div className="p-2">
                   <p className="text-sm text-white ">
                     {workout.workoutDescription ? workout.workoutDescription : "No description available"}
                   </p>
                 </div>
               </div>
             </Link>
-            <div className='flex justify-start'>
-              <button onClick={handleDeleteWorkout} workoutid={workout._id} className='py-2 px-5 bg-orange-500 rounded'>Delete</button>
-            </div>
+              <div className='flex justify-start'>
+                <button onClick={handleDeleteWorkout} workoutid={workout._id} className=' text-center px-2 bg-orange-500 rounded hover:bg-orange-600 transition-all'>Delete</button>
+              </div>
           </div>
         )) : <div className="mx-auto flex min-h-[400px] items-center justify-center p-4">No workouts to display</div>}
       </div>
       {/* Modal/form */}
       {showWorkoutModal ? (
-        <div className='w-full h-screen absolute top-0 bg-zinc-900 text-white p-10'>
+        <div className='w-full min-h-screen absolute top-0 bg-zinc-900 text-white p-10'>
           <div>
             <div className='bg-orange-500 bg-zinc-500 p-2 rounded'>
               <h2 className='text-2xl font-bold mb-2'>New Workout:</h2>

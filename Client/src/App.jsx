@@ -8,8 +8,6 @@ import { setContext } from '@apollo/client/link/context';
 import { Outlet, Navigate } from 'react-router-dom'
 import './index.css'
 
-import Header from './components/Header';
-import Footer from './components/Footer';
 import Nav from './components/Nav';
 
 import decode from 'jwt-decode';
@@ -46,10 +44,12 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-      <main className="main mb-24">
+      <main className="main">
         {!token ? <Navigate to={'/login'} /> : <Outlet />}
-      </main>
+      <div>
       <Nav />
+      </div>
+      </main>
     </ApolloProvider>
   )
 }
