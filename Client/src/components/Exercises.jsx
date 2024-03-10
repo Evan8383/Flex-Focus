@@ -12,7 +12,6 @@ import ExerciseFilter from './ExerciseFilter'
 
 const Exercises = () => {
 
-  // console.log(workoutDataResults)
   const userId = Auth.getUserAccount().data._id
 
   // console.log(userId)
@@ -35,12 +34,6 @@ const Exercises = () => {
   })
   const [showAssignModal, setShowAssignModal] = useState(false)
 
-
-
-
-
-
-
   const [selectedExercise, setSelectedExercise] = useState([])
 
   const handleOpenModal = (e) => {
@@ -56,7 +49,7 @@ const Exercises = () => {
     setSelectedExercise([])
   }
 
-  console.log(selectedExercise)
+  // console.log(selectedExercise)
 
   const workoutDataResults = workoutData?.getOneUserAccount.workouts || []
 
@@ -67,19 +60,20 @@ const Exercises = () => {
     const exerciseToAssign = selectedExercise.toString()
     try {
       const { data } = await assignWorkout({ variables: { workoutId: workoutToAssignTo, exerciseId: exerciseToAssign } })
-      console.log(data)
+      // console.log(data)
     } catch (e) {
       console.error(e)
     }
     handleCloseModal()
   }
+  // console.log(workoutDataResults)
 
   if (loadingExercises) {
     return <div>Loading...</div>
   }
   return (
     <>
-      <div className='p-10'>
+      <div className='p-10 mb-40'>
         <ExerciseFilter setMuscleGroup={setMuscleGroup} muscleGroup={muscleGroup} />
         {!results.length ? <div className='text-white m-auto w-fit mt-10'>Select a category to view exercises</div> : results.map((exercise) => {
           return (
@@ -101,22 +95,33 @@ const Exercises = () => {
             </>
           )
         })}
-        {showAssignModal ? (
-          <>
-            <div className="absolute top-0 left-0 right-0 h-full w-full bg-zinc-900 overscroll-contain">
+      </div>
+      {showAssignModal ? (
+        <>
+          <div className="flex flex-grow mb-40">
+            <div className="top-0 absolute w-full bg-zinc-900 p-10 mb-56">
               {workoutDataResults.map((workout) => {
                 return (
                   <div key={workout._id} className='text-white bg-zinc-900 p-2 rounded cursor-pointer'>
                     <h1>{workout.workoutName}</h1>
+                    <h2>Exercises assigned to Workout</h2>
+                    {workout.assignedExercises ? workout.assignedExercises.map((exercise) => {
+                      return (
+                        <div key={exercise._id}>
+                          <p>{exercise.name}</p>
+                        </div>
+                      )
+                    }) : null}
+
                     <button onClick={handleAssignExercise} workoutId={workout._id} className='text-white bg-orange-500 rounded px-1 cursor-pointer'>Assign</button>
                   </div>
                 )
               })}
               <button onClick={handleCloseModal} className='text-white'>Close</button>
             </div>
-          </>
-        ) : null}
-      </div>
+          </div>
+        </>
+      ) : null}
     </>
   )
 }

@@ -30,6 +30,10 @@ query GetOneUserAccount($userId: ID!) {
       workoutCategory
       workoutDescription
       workoutName
+      assignedExercises {
+        _id
+        name
+      }
     }
   }
 }`
