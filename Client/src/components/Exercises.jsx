@@ -5,16 +5,20 @@ import { Link, useParams } from 'react-router-dom'
 
 import Logo from '/images/FlexLogo.png'
 
-import { GET_ALL_EXERCISES } from '../utils/queries'
+import { GET_ALL_EXERCISES, GET_WORKOUTS } from '../utils/queries'
+import { ASSIGN_EXERCISE } from '../utils/mutations'
 
 import ExerciseFilter from './ExerciseFilter'
 
 const Exercises = () => {
 
   // console.log(workoutDataResults)
+  const userId = Auth.getUserAccount().data._id
+
+  // console.log(userId)
   const { loading: loadingExercises, data: exerciseData, error: exerciseError } = useQuery(GET_ALL_EXERCISES)
   const exerciseDataResults = exerciseData?.getAllExercises || []
-  // console.log(exerciseDataResults)
+  console.log(exerciseDataResults)
 
   const [muscleGroup, setMuscleGroup] = useState(['All'])
   // console.log(muscleGroup)
@@ -24,6 +28,52 @@ const Exercises = () => {
   }
   // console.log(muscleGroup)
   // console.log(results)
+
+  const { loading: loadingWorkouts, data: workoutData, error: workoutError } = useQuery(GET_WORKOUTS, {
+    variables: { userId: userId },
+    pollInterval: 100
+  })
+  const [showAssignModal, setShowAssignModal] = useState(false)
+
+
+
+
+
+
+
+  const [selectedExercise, setSelectedExercise] = useState([])
+
+  const handleOpenModal = (e) => {
+    setShowAssignModal(true)
+    localStorage.setItem('muscleGroup', JSON.stringify(muscleGroup))
+    setMuscleGroup([])
+    const selected = e.target.getAttribute('exerciseid')
+    selectedExercise.push(selected)
+  }
+  const handleCloseModal = () => {
+    setMuscleGroup(JSON.parse(localStorage.getItem('muscleGroup')))
+    setShowAssignModal(false)
+    setSelectedExercise([])
+  }
+
+  console.log(selectedExercise)
+
+  const workoutDataResults = workoutData?.getOneUserAccount.workouts || []
+
+  const [assignWorkout, { assignError, assignData }] = useMutation(ASSIGN_EXERCISE)
+  const handleAssignExercise = async (event) => {
+    event.preventDefault()
+    const workoutToAssignTo = event.target.getAttribute('workoutid')
+    const exerciseToAssign = selectedExercise.toString()
+    try {
+      const { data } = await assignWorkout({ variables: { workoutId: workoutToAssignTo, exerciseId: exerciseToAssign } })
+      console.log(data)
+    } catch (e) {
+      console.error(e)
+    }
+    handleCloseModal()
+  }
+
   if (loadingExercises) {
     return <div>Loading...</div>
   }
@@ -45,12 +95,27 @@ const Exercises = () => {
                   </div>
                 </Link>
                 <div className='w-fit mb-2 mt-1'>
-                  <button className='text-white bg-orange-500 rounded px-1 cursor-pointer'>Assign</button>
+                  <button onClick={handleOpenModal} exerciseid={exercise._id} className='text-white bg-orange-500 rounded px-1 cursor-pointer'>Assign</button>
                 </div>
               </div>
             </>
           )
         })}
+        {showAssignModal ? (
+          <>
+            <div className="absolute top-0 left-0 right-0 h-full w-full bg-zinc-900 overscroll-contain">
+              {workoutDataResults.map((workout) => {
+                return (
+                  <div key={workout._id} className='text-white bg-zinc-900 p-2 rounded cursor-pointer'>
+                    <h1>{workout.workoutName}</h1>
+                    <button onClick={handleAssignExercise} workoutId={workout._id} className='text-white bg-orange-500 rounded px-1 cursor-pointer'>Assign</button>
+                  </div>
+                )
+              })}
+              <button onClick={handleCloseModal} className='text-white'>Close</button>
+            </div>
+          </>
+        ) : null}
       </div>
     </>
   )
