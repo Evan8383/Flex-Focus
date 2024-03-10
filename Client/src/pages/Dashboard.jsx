@@ -52,7 +52,7 @@ const Dashboard = () => {
   console.log(dashboardData)
   return (
     <>
-      <div className={!showModal ? 'bg-zinc-900 w-full m-auto p-10 h-screen' : 'pointer-events-none bg-zinc-900 w-full m-auto p-10 h-screen'}>
+      <div className={!showModal ? 'bg-zinc-900 w-full m-auto p-10 min-h-screen mb-40' : 'pointer-events-none bg-zinc-900 w-full m-auto p-10 h-screen mb-40'}>
         <div className="flex mb-6">
           <h1 className="text-orange-500 text-5xl">FLEX</h1>
           <h1 className="text-white text-5xl">FOCUS</h1>
@@ -72,7 +72,7 @@ const Dashboard = () => {
                     <h3 className='text-xl font-medium mb-2'>{workout.workoutName}</h3>
                     <p>{workout.workoutCategory ? workout.workoutCategory : "Uncategorized"}</p>
                   </div>
-                  <p>{workout.workoutDescription ? workout.workoutDescription : "No description"}</p>
+                    <p className='overflow-hidden text-ellipsis'>{workout.workoutDescription ? workout.workoutDescription : "No description"}</p>
                 </div>
               </div>
             </Link>
