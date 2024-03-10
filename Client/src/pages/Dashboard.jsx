@@ -49,7 +49,6 @@ const Dashboard = () => {
   if (loading) {
     return <div>Loading...</div>
   }
-  console.log(dashboardData)
   return (
     <>
       <div className={!showModal ? 'bg-zinc-900 w-full m-auto p-10 min-h-screen mb-40' : 'pointer-events-none bg-zinc-900 w-full m-auto p-10 h-screen mb-40'}>
@@ -65,8 +64,8 @@ const Dashboard = () => {
           {dashboardData.workouts.length ? dashboardData.workouts.map((workout) => (
 
             // *Copy this styling
-            <Link to={`/app/workouts/${workout._id}`}>
-              <div key={workout._id} className='text-white mb-2'>
+            <Link key={workout._id} to={`/app/workouts/${workout._id}`}>
+              <div className='text-white mb-2'>
                 <div className='bg-zinc-600 p-2 rounded'>
                   <div className="flex justify-between border-b-2 mb-2">
                     <h3 className='text-xl font-medium mb-2'>{workout.workoutName}</h3>

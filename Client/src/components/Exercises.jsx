@@ -89,7 +89,7 @@ const Exercises = () => {
                       {workout.assignedExercises.length ? workout.assignedExercises.map((exercise) => {
                         return (
                           <div className='mt-1' key={exercise._id}>
-                            <p>-> {exercise.name}</p>
+                            <p>&rarr; {exercise.name}</p>
                           </div>
                         )
                       }) : <div><p>No exercises assigned to this workout</p>

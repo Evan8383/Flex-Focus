@@ -97,6 +97,7 @@ type Mutation {
   addNote(userId: ID!, noteTitle: String!, noteBody: String!): UserNotes
   deleteNote(userId: ID!, noteId: ID!): UserNotes
   addExercise(workoutId: ID!, exerciseId: ID!): Workout
+  removeExercise(workoutId: ID!, exerciseId: ID!): Workout
 }
 `
 

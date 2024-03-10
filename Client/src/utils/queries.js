@@ -64,3 +64,19 @@ query GetAllExercises {
     name
   }
 }`
+
+export const GET_ONE_WORKOUT = gql`
+query GetOneWorkout($workoutId: ID!) {
+  getOneWorkout(workoutId: $workoutId) {
+    workoutName
+    workoutCategory
+    workoutDescription
+    workoutNotes
+    assignedExercises {
+      _id
+      name
+      muscleGroup
+      description
+    }
+  }
+}`

@@ -163,8 +163,16 @@ const resolvers = {
         { _id: workoutId },
         { $push: { assignedExercises: exerciseId } },
         { new: true });
+    },
+    removeExercise: async (parent, args) => {
+      const { workoutId, exerciseId } = args;
+      return await Workout.findOneAndUpdate(
+        { _id: workoutId },
+        { $pull: { assignedExercises: exerciseId } },
+        { new: true });
     }
   },
+
   // Lee the wizard says to use this.
   Workout: {
     assignedExercises: async (parent) => {
