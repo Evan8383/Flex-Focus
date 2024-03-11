@@ -14,18 +14,13 @@ const Exercises = () => {
 
   const userId = Auth.getUserAccount().data._id
 
-  // console.log(userId)
   const { loading: loadingExercises, data: exerciseData, error: exerciseError } = useQuery(GET_ALL_EXERCISES)
   const exerciseDataResults = exerciseData?.getAllExercises || []
-  console.log(exerciseDataResults)
   const [muscleGroup, setMuscleGroup] = useState(JSON.parse(localStorage.getItem('muscleGroup')) || ['All'])
-  // console.log(muscleGroup)
   let results = exerciseDataResults.filter(exercise => muscleGroup.includes(exercise.muscleGroup))
   if (muscleGroup.includes('All')) {
     results = exerciseDataResults
   }
-  // console.log(muscleGroup)
-  // console.log(results)
 
   const { loading: loadingWorkouts, data: workoutData, error: workoutError } = useQuery(GET_WORKOUTS, {
     variables: { userId: userId },
@@ -46,7 +41,7 @@ const Exercises = () => {
     selectedExercise.push(selected)
   }
 
-  
+
   let tempMuscleGroup = JSON.parse(localStorage.getItem('muscleGroup'))
   const handleCloseModal = () => {
     setMuscleGroup(tempMuscleGroup)
@@ -54,7 +49,6 @@ const Exercises = () => {
     setSelectedExercise([])
   }
 
-  // console.log(selectedExercise)
 
   const workoutDataResults = workoutData?.getOneUserAccount.workouts || []
 
@@ -65,13 +59,11 @@ const Exercises = () => {
     const exerciseToAssign = selectedExercise.toString()
     try {
       const { data } = await assignWorkout({ variables: { workoutId: workoutToAssignTo, exerciseId: exerciseToAssign } })
-      // console.log(data)
     } catch (e) {
       console.error(e)
     }
     handleCloseModal()
   }
-  // console.log(workoutDataResults)
 
   if (loadingExercises) {
     return <div>Loading...</div>
