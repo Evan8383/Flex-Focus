@@ -10,7 +10,8 @@ const Workout = () => {
   const workoutId = id
 
   const { loading, data, error } = useQuery(GET_ONE_WORKOUT, {
-    variables: { workoutId: workoutId }
+    variables: { workoutId: workoutId },
+    pollInterval: 100
   })
 
   const workout = data?.getOneWorkout || {}
