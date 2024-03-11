@@ -8,6 +8,8 @@ This is a simple workout tracking app built with React. Users can track their da
 
 ## Live Application
 [Checkout the Live Application Here!](https://flex-focus-fitness-175d9bf27015.herokuapp.com/)
+## Application Repository
+[View the Repo Here](https://github.com/Evan8383/Workout-App)
 
 ## Table of Contents
 
