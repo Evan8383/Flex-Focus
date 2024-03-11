@@ -14,19 +14,13 @@ const Exercises = () => {
 
   const userId = Auth.getUserAccount().data._id
 
-  // console.log(userId)
   const { loading: loadingExercises, data: exerciseData, error: exerciseError } = useQuery(GET_ALL_EXERCISES)
   const exerciseDataResults = exerciseData?.getAllExercises || []
-  console.log(exerciseDataResults)
-
-  const [muscleGroup, setMuscleGroup] = useState([])
-  // console.log(muscleGroup)
+  const [muscleGroup, setMuscleGroup] = useState(JSON.parse(localStorage.getItem('muscleGroup')) || ['All'])
   let results = exerciseDataResults.filter(exercise => muscleGroup.includes(exercise.muscleGroup))
   if (muscleGroup.includes('All')) {
     results = exerciseDataResults
   }
-  // console.log(muscleGroup)
-  // console.log(results)
 
   const { loading: loadingWorkouts, data: workoutData, error: workoutError } = useQuery(GET_WORKOUTS, {
     variables: { userId: userId },
@@ -35,6 +29,9 @@ const Exercises = () => {
   const [showAssignModal, setShowAssignModal] = useState(false)
 
   const [selectedExercise, setSelectedExercise] = useState([])
+  useEffect(() => {
+    localStorage.setItem('muscleGroup', JSON.stringify(muscleGroup))
+  }, [muscleGroup])
 
   const handleOpenModal = (e) => {
     setShowAssignModal(true)
@@ -43,13 +40,15 @@ const Exercises = () => {
     const selected = e.target.getAttribute('exerciseid')
     selectedExercise.push(selected)
   }
+
+
+  let tempMuscleGroup = JSON.parse(localStorage.getItem('muscleGroup'))
   const handleCloseModal = () => {
-    setMuscleGroup(JSON.parse(localStorage.getItem('muscleGroup')))
+    setMuscleGroup(tempMuscleGroup)
     setShowAssignModal(false)
     setSelectedExercise([])
   }
 
-  // console.log(selectedExercise)
 
   const workoutDataResults = workoutData?.getOneUserAccount.workouts || []
 
@@ -60,13 +59,11 @@ const Exercises = () => {
     const exerciseToAssign = selectedExercise.toString()
     try {
       const { data } = await assignWorkout({ variables: { workoutId: workoutToAssignTo, exerciseId: exerciseToAssign } })
-      // console.log(data)
     } catch (e) {
       console.error(e)
     }
     handleCloseModal()
   }
-  // console.log(workoutDataResults)
 
   if (loadingExercises) {
     return <div>Loading...</div>
@@ -85,7 +82,7 @@ const Exercises = () => {
                       <button onClick={handleAssignExercise} workoutId={workout._id} className="ml-auto text-center px-2 bg-orange-500 rounded hover:bg-orange-600 transition-all">Assign</button>
                     </div>
                     <div className="p-2">
-                      {workout.assignedExercises.length ? <h3>Exercises assigned to this Workout:</h3> : null }
+                      {workout.assignedExercises.length ? <h3>Exercises assigned to this Workout:</h3> : null}
                       {workout.assignedExercises.length ? workout.assignedExercises.map((exercise) => {
                         return (
                           <div className='mt-1' key={exercise._id}>
