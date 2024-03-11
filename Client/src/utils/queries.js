@@ -38,6 +38,16 @@ query GetOneUserAccount($userId: ID!) {
   }
 }`
 
+export const GET_ONE_EXERCISE = gql`
+query GetOneExercise($id: ID!) {
+  getOneExercise(_id: $id) {
+    name
+    muscleGroup
+    description
+  }
+}
+`
+
 export const GET_USER_WORKOUT_DATA = gql`
 query GetOneUserAccount($userId: ID!) {
   getOneUserAccount(userId: $userId) {
