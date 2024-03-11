@@ -3,16 +3,14 @@
 ## About the app
 This is a simple workout tracking app built with React. Users can track their daily workouts. This app is designed to help users stay organized and motivated in their fitness journey.
 
-## Developers
-[Dakota Blanchard](https://github.com/dakotablanchard) & [Evan Bennett](https://github.com/Evan8383)
-
 ## Live Application
 [Checkout the Live Application Here!](https://flex-focus-fitness-175d9bf27015.herokuapp.com/)
-## Application Repository
-[View the Repo Here](https://github.com/Evan8383/Workout-App)
+
 
 ## Table of Contents
 
+- [Developers](#developers)
+- [Application Repository](#application-repository)
 - [Screenshots](#screenshots)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
@@ -20,6 +18,14 @@ This is a simple workout tracking app built with React. Users can track their da
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
+
+### Developers
+[Dakota Blanchard](https://github.com/dakotablanchard) & [Evan Bennett](https://github.com/Evan8383)
+
+
+### Application Repository
+[View the Repo Here](https://github.com/Evan8383/Workout-App)
+
 
 ## Screenshots
 
@@ -29,6 +35,7 @@ This is a simple workout tracking app built with React. Users can track their da
 <img src="./assets/flex-focus-fitness-175d9bf27015.herokuapp.com_login(iPhone 14 Pro Max) (6).png" alt="drawing" width="200"/>
 <img src="./assets/flex-focus-fitness-175d9bf27015.herokuapp.com_app_dashboard(iPhone 14 Pro Max) (2).png" alt="drawing" width="200"/>
 <img src="./assets/flex-focus-fitness-175d9bf27015.herokuapp.com_app_dashboard(iPhone 14 Pro Max) (3).png" alt="drawing" width="200"/>
+
 
 ## Features
 
