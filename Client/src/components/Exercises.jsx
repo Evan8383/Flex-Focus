@@ -34,9 +34,9 @@ const Exercises = () => {
   const [showAssignModal, setShowAssignModal] = useState(false)
 
   const [selectedExercise, setSelectedExercise] = useState([])
-useEffect(() => {
-  localStorage.setItem('muscleGroup', JSON.stringify(muscleGroup))
-}, [muscleGroup])
+  useEffect(() => {
+    localStorage.setItem('muscleGroup', JSON.stringify(muscleGroup))
+  }, [muscleGroup])
 
   const handleOpenModal = (e) => {
     setShowAssignModal(true)
@@ -45,8 +45,11 @@ useEffect(() => {
     const selected = e.target.getAttribute('exerciseid')
     selectedExercise.push(selected)
   }
+
+  
+  let tempMuscleGroup = JSON.parse(localStorage.getItem('muscleGroup'))
   const handleCloseModal = () => {
-    setMuscleGroup(JSON.parse(localStorage.getItem('muscleGroup')))
+    setMuscleGroup(tempMuscleGroup)
     setShowAssignModal(false)
     setSelectedExercise([])
   }
@@ -87,7 +90,7 @@ useEffect(() => {
                       <button onClick={handleAssignExercise} workoutId={workout._id} className="ml-auto text-center px-2 bg-orange-500 rounded hover:bg-orange-600 transition-all">Assign</button>
                     </div>
                     <div className="p-2">
-                      {workout.assignedExercises.length ? <h3>Exercises assigned to this Workout:</h3> : null }
+                      {workout.assignedExercises.length ? <h3>Exercises assigned to this Workout:</h3> : null}
                       {workout.assignedExercises.length ? workout.assignedExercises.map((exercise) => {
                         return (
                           <div className='mt-1' key={exercise._id}>
