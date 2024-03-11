@@ -18,8 +18,7 @@ const Exercises = () => {
   const { loading: loadingExercises, data: exerciseData, error: exerciseError } = useQuery(GET_ALL_EXERCISES)
   const exerciseDataResults = exerciseData?.getAllExercises || []
   console.log(exerciseDataResults)
-
-  const [muscleGroup, setMuscleGroup] = useState([])
+  const [muscleGroup, setMuscleGroup] = useState(JSON.parse(localStorage.getItem('muscleGroup')) || ['All'])
   // console.log(muscleGroup)
   let results = exerciseDataResults.filter(exercise => muscleGroup.includes(exercise.muscleGroup))
   if (muscleGroup.includes('All')) {
@@ -35,6 +34,9 @@ const Exercises = () => {
   const [showAssignModal, setShowAssignModal] = useState(false)
 
   const [selectedExercise, setSelectedExercise] = useState([])
+useEffect(() => {
+  localStorage.setItem('muscleGroup', JSON.stringify(muscleGroup))
+}, [muscleGroup])
 
   const handleOpenModal = (e) => {
     setShowAssignModal(true)
