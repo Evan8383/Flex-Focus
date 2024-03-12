@@ -17,6 +17,12 @@ const ExerciseList = () => {
   const workoutDataResults = workoutData?.getOneUserAccount.workouts || []
   return (
     <>
+      <div className="flex flex-col justify-center items-center text-white pt-8">
+        <img className='object-scale-down h-16 mb-6' src={Logo} alt="" />
+        <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl relative py-2">Exercises
+          <span className='absolute bottom-0 left-0 w-full h-0.5 bg-white'></span>
+        </h1>
+      </div>
       <Exercises />
     </>
   )

@@ -23,17 +23,20 @@ const ExerciseFilter = (props) => {
   // props.setMuscleGroup()
   // console.log(isSelected)
   return (
-    <div key={123} className="text-white flex flex-wrap justify-around">
-      <button key={1} onClick={handleSelect} className={props.muscleGroup.includes('All')?'bg-orange-500 px-1 rounded m-1' : 'bg-zinc-600 px-1 rounded m-1'}>All</button>
-      <button key={2} onClick={handleSelect} className={props.muscleGroup.includes('Chest')?'bg-orange-500 px-1 rounded m-1' : 'bg-zinc-600 px-1 rounded m-1'}>Chest</button>
-      <button key={3} onClick={handleSelect} className={props.muscleGroup.includes('Shoulders')?'bg-orange-500 px-1 rounded m-1' : 'bg-zinc-600 px-1 rounded m-1'}>Shoulders</button>
-      <button key={4} onClick={handleSelect} className={props.muscleGroup.includes('Triceps')?'bg-orange-500 px-1 rounded m-1' : 'bg-zinc-600 px-1 rounded m-1'}>Triceps</button>
-      <button key={5} onClick={handleSelect} className={props.muscleGroup.includes('Back')?'bg-orange-500 px-1 rounded m-1' : 'bg-zinc-600 px-1 rounded m-1'}>Back</button>
-      <button key={6} onClick={handleSelect} className={props.muscleGroup.includes('Biceps')?'bg-orange-500 px-1 rounded m-1' : 'bg-zinc-600 px-1 rounded m-1'}>Biceps</button>
-      <button key={7} onClick={handleSelect} className={props.muscleGroup.includes('Quads')?'bg-orange-500 px-1 rounded m-1' : 'bg-zinc-600 px-1 rounded m-1'}>Quads</button>
-      <button key={8} onClick={handleSelect} className={props.muscleGroup.includes('Hamstrings')?'bg-orange-500 px-1 rounded m-1' : 'bg-zinc-600 px-1 rounded m-1'}>Hamstrings</button>
-      <button key={9} onClick={handleSelect} className={props.muscleGroup.includes('Glutes')?'bg-orange-500 px-1 rounded m-1' : 'bg-zinc-600 px-1 rounded m-1'}>Glutes</button>
-      <button key={0} onClick={handleSelect} className={props.muscleGroup.includes('Calves')?'bg-orange-500 px-1 rounded m-1' : 'bg-zinc-600 px-1 rounded m-1'}>Calves</button>
+    <div>
+      <p className='text-white text-center pb-2'>Sort by:</p>
+      <div key={123} className="text-white flex flex-wrap justify-around pb-4">
+        <button key={1} onClick={handleSelect} className={props.muscleGroup.includes('All') ? 'bg-orange-500 w-24 rounded m-1' : 'bg-zinc-600 w-24 rounded m-1'}>All</button>
+        <button key={2} onClick={handleSelect} className={props.muscleGroup.includes('Chest') ? 'bg-orange-500 w-24 rounded m-1' : 'bg-zinc-600 w-24 rounded m-1'}>Chest</button>
+        <button key={3} onClick={handleSelect} className={props.muscleGroup.includes('Shoulders') ? 'bg-orange-500 w-24 rounded m-1' : 'bg-zinc-600 w-24 rounded m-1'}>Shoulders</button>
+        <button key={4} onClick={handleSelect} className={props.muscleGroup.includes('Triceps') ? 'bg-orange-500 w-24 rounded m-1' : 'bg-zinc-600 w-24 rounded m-1'}>Triceps</button>
+        <button key={5} onClick={handleSelect} className={props.muscleGroup.includes('Back') ? 'bg-orange-500 w-24 rounded m-1' : 'bg-zinc-600 w-24 rounded m-1'}>Back</button>
+        <button key={6} onClick={handleSelect} className={props.muscleGroup.includes('Biceps') ? 'bg-orange-500 w-24 rounded m-1' : 'bg-zinc-600 w-24 rounded m-1'}>Biceps</button>
+        <button key={7} onClick={handleSelect} className={props.muscleGroup.includes('Quads') ? 'bg-orange-500 w-24 rounded m-1' : 'bg-zinc-600 w-24 rounded m-1'}>Quads</button>
+        <button key={8} onClick={handleSelect} className={props.muscleGroup.includes('Hamstrings') ? 'bg-orange-500 w-24 rounded m-1' : 'bg-zinc-600 w-24 rounded m-1'}>Hamstrings</button>
+        <button key={9} onClick={handleSelect} className={props.muscleGroup.includes('Glutes') ? 'bg-orange-500 w-24 rounded m-1' : 'bg-zinc-600 w-24 rounded m-1'}>Glutes</button>
+        <button key={0} onClick={handleSelect} className={props.muscleGroup.includes('Calves') ? 'bg-orange-500 w-24 rounded m-1' : 'bg-zinc-600 w-24 rounded m-1'}>Calves</button>
+      </div>
     </div>
   )
 }
