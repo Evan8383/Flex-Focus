@@ -62,36 +62,38 @@ export default function MyWorkouts() {
   if (loading) return <div className='bg-zinc-900 text-white'>Loading...</div>
   return (
     <>
-      <div className="w-full gap-4 bg-zinc-900 text-white p-10 min-h-screen mb-24">
-        <div className="mx-auto flex justify-between max-w-2xl mb-6">
-          <div className="space-y-2">
-            <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl">Your Workouts</h1>
-            <button onClick={() => setShowWorkoutModal(true)} className="w-full h-12 text-white bg-orange-500 text-xl font-medium rounded-md shadow-md hover:bg-orange-600 transition-all">
-              Add Workout
-            </button>
-          </div>
-          <img className='w-24 h-24 my-auto' src={Logo} alt="" />
+      <div className="flex flex-col items-center w-full bg-zinc-900 text-white p-8 min-h-screen mb-24">
+        <div className="flex flex-col justify-center items-center max-w-2xl mb-2">
+
+          <img className='object-scale-down h-16  mb-6' src={Logo} alt="" />
+          <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl relative py-2">Your Workouts
+            <span className='absolute bottom-0 left-0 w-full h-0.5 bg-white'></span>
+          </h1>
+          <button onClick={() => setShowWorkoutModal(true)} className="text-white my-4 p-2 pl-6 pr-6 bg-orange-500 rounded-lg outline outline-1 hover:text-gray-300">
+            Add Workout
+          </button>
         </div>
         {loading ? <div>Loading...</div> : null}
         {workoutData.workouts.length ? workoutData.workouts.map((workout) => (
-          <div key={workout._id} className="mb-2 ">
-            <Link to={`/app/workouts/${workout._id}`}>
-              <div className="rounded overflow-hidden divide-y bg-zinc-600 cursor-pointer transition-all">
-                <div className="flex items-center p-2">
-                  <h2 className="text-xl font-medium mb-2">{workout.workoutName}</h2>
-                  <p className="ml-auto text-sm white">{workout.workoutCategory ? workout.workoutCategory : 'Uncategorized'}</p>
+          <div key={workout._id} className="mb-4 w-5/6 relative">
+            <Link to={`/app/workouts/${workout._id}`} className=''>
+              <div className='bg-zinc-600 p-2 rounded-md cursor-pointer text-white hover:bg-gray-400 transition-colors'>
+                <div className="flex justify-between items-center border-b-2 mb-2">
+                  <div>
+                    <h2 className="text-xl font-medium mb-2">{workout.workoutName}</h2>
+                    <p className="mb-2">{workout.workoutCategory ? workout.workoutCategory : 'Uncategorized'}</p>
+                  </div>
                 </div>
                 <div className="p-2">
-                  <p className="text-sm text-white ">
+                  <p className="text-sm text-white">
                     {workout.workoutDescription ? workout.workoutDescription : "No description available"}
                   </p>
                 </div>
               </div>
             </Link>
-              <div className='flex justify-start'>
-                <button onClick={handleDeleteWorkout} workoutid={workout._id} className=' text-center px-2 bg-orange-500 rounded hover:bg-orange-600 transition-all'>Delete</button>
-              </div>
+            <button onClick={handleDeleteWorkout} workoutid={workout._id} className='text-white absolute top-2 right-2 px-2 bg-orange-500 rounded-lg outline outline-1 hover:text-gray-300'>Delete</button>
           </div>
+
         )) : <div className="mx-auto flex min-h-[400px] items-center justify-center p-4">No workouts to display</div>}
       </div>
       {/* Modal/form */}
